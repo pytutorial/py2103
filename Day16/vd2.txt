@@ -41,3 +41,6 @@ db.pos_order.insert({
   price: 12000000,
   qty: 2
 })
+
+db.pos_order.find({'product.code': 'IPX'})
+db.pos_order.find({'customer.phone': {$regex: '0832133'} })
