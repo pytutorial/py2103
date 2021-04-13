@@ -1,3 +1,4 @@
+#pip install mysqlclient
 import MySQLdb
 
 db_host = '34.122.175.106'

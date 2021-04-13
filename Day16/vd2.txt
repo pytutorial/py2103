@@ -1,0 +1,43 @@
+- Nhap vao ma san pham --> liet ke cac don hang cua sp
+- Nhap vao so dien thoai KH --> liet ke don hang/sp KH da mua
+
+db.category.insert(
+  [
+     {code: 'PHONE', name: 'Điện thoại'},     // record 1
+     {code: 'TABLET', name: 'Máy tính bảng'}, // record 2
+     {code: 'LAPTOP', name: 'Laptop'},        // record 3
+  ]
+)
+
+db.product.insert({
+  code: 'IPX',
+  name: 'IPhone X',
+  price: 10000000,
+  category: {code: 'PHONE', name: 'Điện thoại'}
+})
+
+db.product.insert({
+  code: 'IPAD_X',
+  name: 'Ipad X',
+  price: 12000000,
+  category: {code: 'TABLET', name: 'Máy tính bảng'}
+})
+
+db.customer.insert([
+  {name: 'Nguyễn Văn A', phone: '0921312', address: 'Hà Nội'},
+  {name: 'Nguyễn Thị B', phone: '0832133', address: 'TP.HCM'}
+])
+
+db.pos_order.insert({
+  product: {code: 'IPX', name: 'IPhone X'},
+  customer: {name: 'Nguyễn Văn A', phone: '0921312'},
+  price: 10000000,
+  qty: 1
+})
+
+db.pos_order.insert({
+  product: {code: 'IPAD_X', name: 'IPad X'},
+  customer: {name: 'Nguyễn Thị B', phone: '0832133'},
+  price: 12000000,
+  qty: 2
+})

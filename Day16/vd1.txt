@@ -1,0 +1,37 @@
+db.author.insert({
+  name: 'Nam Cao',
+  alias: 'Nam Cao'
+})
+
+db.book.insert({
+  name: 'Chí Phèo',
+  code: 'B0003',
+  publish_year: 1943,
+  author: {
+     name: 'Nam Cao',
+     alias: 'NC'
+  }
+})
+
+db.book.update({code: 'B0003'}, 
+{
+   $set: {publish_year: 1942}
+})
+
+//equal:
+db.book.find({code: 'B0003'})
+
+// LIKE:
+db.book.find({name: {$regex: 'Hạc'}})
+
+// COMPARE:
+db.book.find({publish_year: {$gte: 1940}})
+
+// AND
+db.book.find({publish_year: 1943, 'author.name': 'Nam Cao'})
+
+// OR
+db.book.find({$or : [
+  {name: {$regex: 'Nam'}},
+  {'author.name': {$regex: 'Nam'}}
+]})
