@@ -42,5 +42,39 @@ class OrderItem(Base):
 
 engine = create_engine(conn_url)
 Session = sessionmaker(bind=engine)
+
+def getProductByCode(session, code) -> Product:
+    return session.query(Product)            \
+                .filter(Product.code==code)  \
+                .first()
+
+def getCustomerByPhone(session, phone) -> Customer:
+    return session.query(Customer)            \
+                .filter(Customer.phone==phone)  \
+                .first()
+
+def saveOrder(session, customer_phone):
+    order = Order()
+    order.date = datetime.now()   # from datetime import datetime
+    order.customer = getCustomerByPhone(customer_phone)
+    session.add(order)
+    session.commit()
+
+def saveItem(session, order_id, product_code, qty):
+    ...
+
 if __name__ == '__main__':
+    data = {
+        "customer_phone": "098321231",
+        "items": [
+            {
+                "product_code": "HH_01",
+                "qty": 10
+            },
+            {
+                "product_code": "VNMK_05",
+                "qty": 20
+            }
+        ]
+    }
     Base.metadata.create_all(engine)    
