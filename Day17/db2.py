@@ -62,7 +62,14 @@ def saveOrder(session, customer_phone):
     session.commit()
 
 def saveItem(session, order_id, product_code, qty):
-    ...
+    item = OrderItem()
+    item.order_id = order_id
+    p = getProductByCode(session, product_code)
+    item.product = p
+    item.price_unit = p.price
+    item.qty = qty
+    session.add(item)
+    session.commit()
 
 if __name__ == '__main__':
     data = {
