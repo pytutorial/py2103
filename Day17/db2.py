@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship
 from urllib.parse import quote
+from datetime import datetime
 Base = declarative_base()
 
 db_host = '34.122.175.106'       #/phpmyadmin
@@ -56,7 +57,7 @@ def getCustomerByPhone(session, phone) -> Customer:
 def saveOrder(session, customer_phone):
     order = Order()
     order.date = datetime.now()   # from datetime import datetime
-    order.customer = getCustomerByPhone(customer_phone)
+    order.customer = getCustomerByPhone(session, customer_phone)
     session.add(order)
     session.commit()
 
