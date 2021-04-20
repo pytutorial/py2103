@@ -1,0 +1,13 @@
+{
+    "customer_phone": "098321231",
+    "items": [
+        {
+            "product_code": "HH_01",
+            "qty": 10
+        },
+        {
+            "product_code": "VNMK_05",
+            "qty": 20
+        }
+    ]
+}
