@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String,\
          DateTime, ForeignKey, create_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy.orm import declarative_base,\
+         sessionmaker, relationship
 from urllib.parse import quote
 Base = declarative_base()
 
@@ -26,7 +27,11 @@ class Book(Base):
     name = Column(String(200))
     qty = Column(Integer)
     author_id = Column(Integer, ForeignKey('author.id'))
+    author = relationship('Author')
 
+    def __repr__(self): 
+        return self.name
+        
 engine = create_engine(conn_url)
 Session = sessionmaker(bind=engine)
 
