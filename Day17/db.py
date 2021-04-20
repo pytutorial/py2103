@@ -16,6 +16,8 @@ class Author(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(100))
     alias = Column(String(100))
+    def __repr__(self): 
+        return self.name
 
 class Book(Base):
     __tablename__ = 'book'
