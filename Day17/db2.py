@@ -1,3 +1,4 @@
+import json
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship
 from urllib.parse import quote
@@ -60,6 +61,7 @@ def saveOrder(session, customer_phone):
     order.customer = getCustomerByPhone(session, customer_phone)
     session.add(order)
     session.commit()
+    return order
 
 def saveItem(session, order_id, product_code, qty):
     item = OrderItem()
@@ -72,17 +74,13 @@ def saveItem(session, order_id, product_code, qty):
     session.commit()
 
 if __name__ == '__main__':
-    data = {
-        "customer_phone": "098321231",
-        "items": [
-            {
-                "product_code": "HH_01",
-                "qty": 10
-            },
-            {
-                "product_code": "VNMK_05",
-                "qty": 20
-            }
-        ]
-    }
+    with open('products.json') as fi:
+        data = json.load(fi)
+
     Base.metadata.create_all(engine)    
+    session = Session()
+    order = saveOrder(session, data['customer_phone'])
+    for item in data['items']:
+        product_code = item['product_code']
+        qty = item['qty']
+        saveItem(session, order.id, product_code, qty)
