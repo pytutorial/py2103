@@ -1,28 +1,77 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <html>
-  <head></head>
+  <head>
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,700&amp;display=swap&amp;subset=vietnamese" rel="stylesheet">
+    <style>
+      .container {
+        margin: 50px auto 0 auto;
+        padding: 20px;
+        border: 1px solid #AAA;
+        border-radius: 5px;
+        width: 50%;
+      }
+
+      .form-group {
+        margin: 10px 0px;
+      }
+
+      .form-input {
+        width: 100%;
+        margin-top: 5px;
+        border: 1px solid #AAA;
+        border-radius: 3px;
+      }     
+
+      input[type=number]{
+        width: 30px;
+        text-align: center;
+        border: 1px solid #AAA;
+        border-radius: 3px;
+      }
+
+      input {
+        height: 25px;        
+      }
+      #btnSave {
+        margin-top: 10px;
+        width: 100%;
+        height: 30px;
+        background-color: blue;
+        color: white;
+        border:0;
+        border-radius: 3px;
+        font-family:  Arial,sans-serif;
+      }
+      body {
+        font-size: 15px;
+        font-family: "Noto Serif", serif;
+      }
+    </style>
+  </head>
   <body>
-    <div>
-      <label>Sản phẩm:</label>
-      <input>
-    </div>
-    <div>
-      <label>Số lượng:</label>
-      <input type="number" min="1">
-    </div>
-    <div>
-      <label>Tên Khách Hàng:</label>
-      <input>
-    </div>
-    <div>
-      <label>SĐT Khách Hàng:</label>
-      <input>
-    </div>
-    <div>
-      <label>Địa chỉ Khách Hàng:</label>
-      <textarea></textarea>
-    </div>
-    <button>Lưu lại</button>
+    <div class="container">
+      <div class="form-group">
+        <label>Sản phẩm:</label>
+        <input class="form-input">
+      </div>
+      <div class="form-group">
+        <label>Số lượng:</label>
+        <input type="number" min="1">
+      </div>
+      <div class="form-group">
+        <label>Tên Khách Hàng:</label>
+        <input class="form-input">
+      </div>
+      <div class="form-group">
+        <label>SĐT Khách Hàng:</label>
+        <input class="form-input">
+      </div>
+      <div class="form-group">
+        <label>Địa chỉ Khách Hàng:</label>
+        <textarea class="form-input"></textarea>
+      </div>
+      <button id='btnSave'>Lưu lại</button>
+    </div>   
   </body>
 </html>
