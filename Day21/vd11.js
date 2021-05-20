@@ -22,3 +22,4 @@ productList.filter(p => p.name.includes(keyword))
             .filter(p => p.price > minPrice)
             .filter(p => p.price <  maxPrice)
             .forEach(p => console.log(p.name));
+
