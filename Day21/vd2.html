@@ -1,0 +1,18 @@
+<label>Tên của bạn:</label>
+<input id='name'>
+<div id='app'></div>
+
+<button onclick="setContent()">Set content</button>
+
+<script>
+    function setContent() {
+        //alert('Clicked');
+        var inpEl = document.getElementById('name');
+        var name = inpEl.value;
+        //alert(name);
+        //console.log(name);
+
+        var divEl = document.getElementById('app');
+        divEl.innerHTML = `Xin chào ${name}`;
+    }
+</script>
