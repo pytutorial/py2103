@@ -1,0 +1,19 @@
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+<div id='app'>
+    <p>
+        <label>Tên của bạn:</label> <input id='name'>
+    </p>
+    <p id='message'></p>
+    <button id='btnOk'>OK</button>
+ </div>
+
+<script>
+    $('#btnOk').click(function() {
+        var name = $('#name').val();                // document.getElementById('name').value
+        $('#message').html('Xin chào ' + name);     // document.getElementById('message').innerHTML = '';
+    });
+    
+    //$('#app').html('Hello'); 
+    //document.getElementById('app').innerHTML = 'Hello';
+</script>
