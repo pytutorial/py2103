@@ -1,0 +1,17 @@
+<meta charset="utf-8">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<div>
+    <div>Bạn có thể học vào ngày nào trong tuần</div>
+
+    <p> <input class='lesson_vote' type="checkbox"> Thứ hai</p>
+    <p> <input class='lesson_vote' type="checkbox"> Thứ ba</p>
+    <p> <input class='lesson_vote' type="checkbox"> Thứ năm</p>
+    <p> <input type="checkbox" id='check_all'><b> Tất cả</b></p>
+</div>
+<script>
+    $('#check_all').click(function() {
+        var checked = $('#check_all').prop('checked');
+        $('.lesson_vote').prop('checked', checked);
+    });
+</script>
