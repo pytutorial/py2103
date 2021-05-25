@@ -1,0 +1,39 @@
+<meta charset="UTF-8">
+<label>Danh sách công việc</label> <!-- &#10003 -->
+<ul id='tasks'></ul>
+<label>Thêm công việc:</label> <input id='new_task'>
+<button id='btnAddTask' onclick="addTask()">Thêm</button>
+
+<script>
+    var taskList = [
+        {name: 'Dạy lúc 7h30', done: false}
+    ];   // state
+    function addTask() {
+        var new_task = document.getElementById('new_task').value;
+        taskList.push({name: new_task, done: false});
+        renderTasks();
+        document.getElementById('new_task').value = '';
+    }
+    function completeTask(index) {
+        alert(index); // TODO: Hide task `index`
+    }
+    function renderTasks() {
+        var html = taskList
+            .filter(task => !task.done)
+            .map((task, index) => 
+                `<li>
+                    ${task.name} 
+                    <a href='javascript:completeTask(${index})'>
+                        &#10003
+                    </a>
+                </li>`
+            ).join('');
+        /*
+        for(var i=0; i < taskList.length; i++) {
+            html += '<li>' + taskList[i].name 
+                    + ' <a href="javascript:completeTask()">&#10003</a></li>';
+        }*/
+        document.getElementById('tasks').innerHTML = html;
+    }
+    renderTasks();
+</script>
