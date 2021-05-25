@@ -1,0 +1,20 @@
+<div>
+    <p>
+        <label>Số điện thoại: </label>
+        <input id='phone' onchange="validatePhone()">
+        <div style="color:red">
+            <small id='phone_error'></small>
+        </div>
+    </p>
+</div>
+
+<script>
+    function validatePhone() {
+        var phone = document.getElementById('phone').value;
+        var reg = RegExp('^0[0-9]{9}$');
+        if(!reg.test(phone)) {
+            //alert('Số điện thoại không hợp lệ');
+            document.getElementById('phone_error').innerText = 'Số điện thoại không hợp lệ';
+        }
+    }
+</script>
