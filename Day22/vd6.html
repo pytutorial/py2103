@@ -1,0 +1,34 @@
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<meta charset="utf-8">
+<div>
+    <p>
+        <label>Sản phẩm:</label>
+        <select id='product'>
+            <option>--Chọn sản phẩm--</option>
+            <option value='IPX'>IPhone X</option>
+            <option value='IP11'>IPhone 11</option>
+            <option value='IP12'>IPhone 12</option>
+        </select>
+    </p>
+    <p><label>Số lượng:</label>  <input id='qty' type='number' min='1'></p>
+    <p>Tổng số tiền: <span id='total'>.....</span> </p>
+</div>
+<script>
+    var productList = [
+        {code: 'IPX', price: 10500000},
+        {code: 'IP11', price: 11500000},
+        {code: 'IP12', price: 12500000},
+    ];
+    $('#qty, #product').change(function(){
+        var productCode = $('#product').val();
+        var qty = $('#qty').val();
+        //console.log('product=', productCode, 'qty=', qty);
+        var product = productList.find(p => p.code == productCode);
+
+        if(qty > 0 && product) {
+            var total =  qty*product.price;
+            //console.log('total =', total);
+            $('#total').html(total + ' đ');
+        }
+    })
+</script>
