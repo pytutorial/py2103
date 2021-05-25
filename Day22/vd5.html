@@ -1,0 +1,40 @@
+<meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<style>
+    .tab-header {
+        background-color: #AAA;
+        font-weight: bold;
+        padding: 10px;
+        margin-top: 20px;
+    }
+</style>
+<div class="tab">
+    <div id='tab-header-1' class="tab-header">
+        Tab 1
+    </div>
+    <div id='tab-body-1' class="tab-body">
+        Trả lời phỏng vấn báo chí sau khi bỏ phiếu bầu cử Quốc hội khóa XV và Hội đồng nhân dân các cấp nhiệm kỳ 2021-2026 tại phường Nguyễn Du (quận Hai Bà Trưng, Hà Nội), Tổng Bí thư Nguyễn Phú Trọng bày tỏ vui mừng, phấn khởi và xúc động được cùng với cử tri Thủ đô và cả nước thực hiện quyền và nghĩa vụ công dân của mình, tham gia bỏ phiếu chọn đại biểu Quốc hội và đại biểu Hội đồng nhân dân.
+    </div>
+</div>
+<div class="tab">
+    <div class="tab-header">
+        Tab 2
+    </div>
+    <div class="tab-body">
+        Tổng Bí thư cho biết, cuộc bầu cử Quốc hội hôm nay là lần thứ 15, diễn ra khi đất nước đã trải qua hơn 75 năm giành được độc lập, qua 14 kỳ bầu cử Quốc hội, qua 35 năm đổi mới. Cả nước đã hoàn thành nhiệm vụ kế hoạch phát triển kinh tế - xã hội 5 năm giai đoạn 2016-2021 và đang bước vào giai đoạn mới, triển khai thực hiện kế hoạch phát triển kinh tế - xã hội 5 năm tới.
+    </div>
+</div>
+<script>
+    $('.tab-header').click(function(){
+        var tabbody = $(this).parent().children('.tab-body');
+        var hidden = tabbody.attr('hide') == 1;
+        if(hidden) {
+            tabbody.show();
+            tabbody.attr('hide', 0);
+        }else {
+            tabbody.hide();
+            tabbody.attr('hide', 1);
+        }
+    });
+</script>
