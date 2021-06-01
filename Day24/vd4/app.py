@@ -7,7 +7,7 @@ db_user = 'mongo'
 db_pass = 'abc@123'
 #db_name = 'py2103'
 client = MongoClient(db_host, username=db_user, password=db_pass)
-db = client.py2103
+db = client.nvx
 
 from flask import Flask,render_template,request,redirect
 app = Flask(__name__)
@@ -32,5 +32,10 @@ def saveProduct():
         'price': price
     })
     return redirect('/')
+
+@app.route('/delete-product',methods=['POST'])
+def deleteProduct():
+    pid = request.form['pid']
+    return 'Pid:' + pid
 
 app.run(debug=True)

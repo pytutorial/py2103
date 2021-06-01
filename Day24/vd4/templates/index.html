@@ -1,9 +1,27 @@
 <ul>
-    {% for p in productList %}
-        <li>{{p.name}}</li>
-    {% endfor %}
+  {% for p in productList %}
+    <li>
+      {{p.name}}
+      <a href='javascript:deleteProduct("{{p._id}}")'>
+        Xóa
+      </a>
+    </li>
+  {% endfor %}
 </ul>
 
+<form id="fmt" method="POST" action="/delete-product">
+  <input type="hidden" id="pid" name="pid">
+</form>
+
 <a href='/add-product'>
-    Thêm sản phẩm
+  Thêm sản phẩm
 </a>
+<script>
+  function deleteProduct(pid) {
+    if(!confirm('Bạn có chắc muốn xoá?')){
+      return;
+    }
+    document.getElementById('pid').value = pid;
+    document.getElementById('fmt').submit();
+  }
+</script>
