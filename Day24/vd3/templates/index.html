@@ -1,0 +1,31 @@
+<!--index.html-->
+<h4>Danh sách sản phẩm</h4>
+<ul>
+  {% for p in productList %}
+    <li>{{p.name}}</li>
+  {% endfor %}
+</ul>
+
+<table border="1">
+  <thead>
+    <tr>
+      <td>Mã</td>
+      <td>Tên</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% if not productList %}
+    <tr>
+      <td colspan='2'>
+        Không có sản phẩm nào
+      </td>
+    </tr>
+    {% endif %}
+    {% for p in productList %}
+    <tr>
+      <td>{{p.code}}</td>
+      <td>{{p.name}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
