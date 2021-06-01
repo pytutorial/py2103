@@ -1,14 +1,18 @@
 <!--product_form.html-->
 <form method="POST" action='/save-product'>
   <h4>Thông tin sản phẩm</h4>
+  {% if p._id %}
+    <input type="hidden" name="pid" 
+        value='{{p._id}}'>
+  {% endif %}
   <p>
-    Mã: <input name='code'/>
+    Mã: <input name='code' value='{{p.code}}'/>
   </p>
   <p>
-    Tên: <input name='name'/>
+    Tên: <input name='name' value='{{p.name}}'/>
   </p>
   <p>
-    Đơn giá : <input type="number"
+    Đơn giá : <input type="number" value='{{p.price}}'
                  min="0" name="price"/>
   </p>
   <button type="submit">
