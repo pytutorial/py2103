@@ -33,9 +33,12 @@ def saveProduct():
     })
     return redirect('/')
 
+from bson.objectid import ObjectId
 @app.route('/delete-product',methods=['POST'])
 def deleteProduct():
     pid = request.form['pid']
-    return 'Pid:' + pid
+    db.product.remove({'_id': ObjectId(pid)})
+    #return 'Pid:' + pid
+    return redirect('/')
 
 app.run(debug=True)
