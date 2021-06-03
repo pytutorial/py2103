@@ -1,0 +1,23 @@
+<h4>Tìm kiếm sản phẩm</h4>
+<div>
+    <p>Tên sản phẩm: <input id='keyword'> </p>
+    <p>Giá từ  :<input type='number' min='0' id='priceMin'> (triệu đồng)</p>
+    <p>Giá đến :<input type='number' min='0' id='priceMax'> (triệu đồng)</p>
+    <button onclick="searchProduct()">Tìm kiếm</button>
+</div>
+<ul id='product_list'></ul>
+<script>
+    function searchProduct(){
+        var keyword = document.getElementById('keyword').value;
+        var priceMin = Number(document.getElementById('priceMin').value) || 0;
+        var priceMax = Number(document.getElementById('priceMax').value ) || 100;
+        var url = `/search-product?keyword=${keyword}&priceMin=${priceMin*1e6}&priceMax=${priceMax*1e6}`;
+        fetch(url)
+            .then(resp => resp.json())
+            .then(data => renderProductList(data));
+    }
+    function renderProductList(data){
+        var html = data.map(p => `<li>${p.name} (${p.price} đ)</li>`).join('');
+        document.getElementById('product_list').innerHTML = html;
+    }
+</script>

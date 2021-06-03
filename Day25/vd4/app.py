@@ -1,4 +1,5 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
+
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 db_host = '34.70.69.231'
@@ -59,5 +60,9 @@ def searchProduct():
     }))
     for p in productList: p['_id'] = str(p['_id'])
     return jsonify(productList)
+
+@app.route('/') #127.0.0.1:5000
+def index():
+    return render_template('index.html')
 
 app.run(debug=True)
