@@ -1,0 +1,15 @@
+<h4>Danh sách sản phẩm</h4>
+<ul id='product_list'></ul>
+<script>
+    function renderProductList(data){
+        console.log(data);
+        var html = data.map(p => `<li>${p.name}</li>`).join('');
+        document.getElementById('product_list').innerHTML = html;
+    }
+    function getProductList() {
+        fetch('/get-product-list')
+            .then(resp => resp.json())
+            .then(data => renderProductList(data));
+    }
+    getProductList();
+</script>
