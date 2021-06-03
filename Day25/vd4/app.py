@@ -45,7 +45,19 @@ def updateProduct(pid):
 
 @app.route('/delete-product/<pid>', methods=['DELETE'])
 def deleteProduct(pid):
-    db.product.remove(...)
+    db.product.remove({'_id': ObjectId(pid)})
     return jsonify({'sucess': True})
+
+@app.route('/search-product')
+def searchProduct():
+    keyword = request.args.get('keyword', '')
+    priceMin = int(request.args.get('priceMin') or 0)
+    priceMax = int(request.args.get('priceMax') or 100e6)
+    productList = list(db.product.find({
+        'name':{'$regex': keyword, '$options': 'i'},
+        'price':{'$gte': priceMin, '$lte': priceMax}
+    }))
+    for p in productList: p['_id'] = str(p['_id'])
+    return jsonify(productList)
 
 app.run(debug=True)
