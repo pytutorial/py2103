@@ -11,10 +11,19 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    productList = list(db.product.find())
+    return render_template('index.html', productList=productList)
 
-@app.route('/create-product')
+@app.route('/create-product', methods=['GET', 'POST'])
 def createProduct():
-    return render_template('form.html')
+    if request.method == 'GET':
+        return render_template('form.html')
+    else:
+        fields = ['code', 'name', 'price', 'qty', 'description']
+        product = {f : request.form[f] for f in fields}
+        product['price'] = int(product['price'] or 0)
+        product['qty'] =  int(product['qty'] or 0)
+        db.product.insert(product)
+        return redirect('/')
 
 app.run(debug=True)

@@ -2,6 +2,34 @@
 
 <div class="container mt-3">
     <h4>Danh sách sản phẩm của cửa hàng</h4>
+    <!--<ul>
+        {% for p in productList %} 
+            <li>{{p.name}}</li>
+        {% endfor %}
+    </ul>-->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th style="width:15%">Mã</th>
+                <th style="width:20%">Tên sản phẩm</th>
+                <th style="width:15%">Đơn giá</th>
+                <th style="width:35%">Ảnh</th>
+                <th style="width:15%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in productList %}
+                <tr>
+                    <td>{{p.code}}</td>
+                    <td>{{p.name}}</td>
+                    <td>{{p.price}} đ</td>
+                    <td><img src='{{p.image}}'/></td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
     <a href='/create-product' class="btn btn-primary">
         Thêm sản phẩm
     </a>
