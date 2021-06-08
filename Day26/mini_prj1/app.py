@@ -8,8 +8,13 @@ db = client.db0001
 
 from flask import Flask, request, render_template, redirect
 app = Flask(__name__)
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/create-product')
+def createProduct():
+    return render_template('form.html')
 
 app.run(debug=True)
