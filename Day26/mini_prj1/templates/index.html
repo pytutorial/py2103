@@ -2,12 +2,14 @@
 
 <div class="container mt-3">
     <h4>Danh sách sản phẩm của cửa hàng</h4>
-    <!--<ul>
-        {% for p in productList %} 
-            <li>{{p.name}}</li>
-        {% endfor %}
-    </ul>-->
-    <table class="table table-bordered">
+
+    <div class="mt-3">
+        <form>
+            <input value="{{keyword}}" name="keyword" class="form-control" placeholder="Nhập tên sản phẩm để tìm"/>
+        </form>
+    </div>
+
+    <table class="mt-3 table table-bordered">
         <thead>
             <tr>
                 <th style="width:15%" class="text-center">Mã</th>

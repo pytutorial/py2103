@@ -46,7 +46,10 @@ def deleteProduct(pid):
 
 @app.route('/')
 def index():
-    productList = list(db.product.find())
-    return render_template('index.html', productList=productList)
+    keyword = request.args.get('keyword', '')
+    productList = list(db.product.find({
+        'name': {'$regex': keyword, '$options': 'i'}
+    }))
+    return render_template('index.html', productList=productList, keyword=keyword)
 
 app.run(debug=True)
