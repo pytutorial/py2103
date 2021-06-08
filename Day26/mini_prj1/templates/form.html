@@ -7,29 +7,29 @@
     <div class="row mt-2">
       <div class="col-6">
         <label>Mã:</label>
-        <input class="form-control" name="code"/>
+        <input class="form-control" name="code" value="{{ product.code }}"/>
       </div>
       <div class="col-6">
         <label>Tên sản phẩm:</label>
-        <input class="form-control" name="name"/>
+        <input class="form-control" name="name" value="{{ product.name }}"/>
       </div>
     </div>
 
     <div class="row mt-2">
       <div class="col-6">
         <label>Đơn giá:</label>
-        <input class="form-control" type="number" min="0" name="price"/>
+        <input class="form-control" type="number" min="0" name="price" value="{{ product.price }}"/>
       </div>
       <div class="col-6">
         <label>Số lượng trong kho:</label>
-        <input class="form-control" type="number" min="0" name="qty" />
+        <input class="form-control" type="number" min="0" name="qty" value="{{ product.qty }}"/>
       </div>
     </div>
 
     <div class="row mt-2">
       <div class="col">
         <label>Mô tả:</label>
-        <textarea class="form-control" rows="3" name="description"></textarea>
+        <textarea class="form-control" rows="3" name="description">{{ product.description }}</textarea>
       </div>
     </div>
 
@@ -37,6 +37,9 @@
       <div class="col">
         <label>Ảnh:</label>
         <input class="form-control-file" type="file" name="image"/>
+        {% if product and product.image %}
+          <a href='{{product.image}}' target="_blank">Ảnh đã upload</a>
+        {% endif %}
       </div>
     </div>
 

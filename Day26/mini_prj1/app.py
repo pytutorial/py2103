@@ -10,20 +10,19 @@ import time
 from flask import Flask, request, render_template, redirect, jsonify
 app = Flask(__name__)
 
-@app.route('/delete-product/<pid>', methods=['DELETE'])
-def deleteProduct(pid):
-    db.product.remove({'_id': ObjectId(pid)})
-    return jsonify({'success': True})
-
-@app.route('/')
-def index():
-    productList = list(db.product.find())
-    return render_template('index.html', productList=productList)
+@app.route('/update-product/<pid>', methods=['GET', 'POST'])
+def updateProduct(pid):
+    if request.method == 'GET':
+        product = db.product.find_one({'_id': ObjectId(pid)})
+        return render_template('form.html', product=product)
+    else:
+        #TODO: Update DB
+        return redirect('/')
 
 @app.route('/create-product', methods=['GET', 'POST'])
 def createProduct():
     if request.method == 'GET':
-        return render_template('form.html')
+        return render_template('form.html', product={})
     else:
         fields = ['code', 'name', 'price', 'qty', 'description']
         product = {f : request.form[f] for f in fields}
@@ -39,5 +38,15 @@ def createProduct():
 
         db.product.insert(product)
         return redirect('/')
+
+@app.route('/delete-product/<pid>', methods=['DELETE'])
+def deleteProduct(pid):
+    db.product.remove({'_id': ObjectId(pid)})
+    return jsonify({'success': True})
+
+@app.route('/')
+def index():
+    productList = list(db.product.find())
+    return render_template('index.html', productList=productList)
 
 app.run(debug=True)
