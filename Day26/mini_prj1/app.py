@@ -7,8 +7,13 @@ client = MongoClient(db_host, username=db_user, password=db_pass)
 db = client.db0001
 
 import time
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, jsonify
 app = Flask(__name__)
+
+@app.route('/delete-product/<pid>', methods=['DELETE'])
+def deleteProduct(pid):
+    db.product.remove({'_id': ObjectId(pid)})
+    return jsonify({'success': True})
 
 @app.route('/')
 def index():

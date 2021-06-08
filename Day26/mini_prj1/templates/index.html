@@ -10,21 +10,32 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th style="width:15%">Mã</th>
-                <th style="width:20%">Tên sản phẩm</th>
+                <th style="width:13%">Mã</th>
+                <th style="width:22%">Tên sản phẩm</th>
                 <th style="width:15%">Đơn giá</th>
                 <th style="width:35%">Ảnh</th>
                 <th style="width:15%"></th>
             </tr>
         </thead>
         <tbody>
+            {% if not productList %} 
+                <tr> 
+                    <td colspan="5"> Không có sản phẩm nào </td> 
+                </tr>
+            {% endif %}
             {% for p in productList %}
                 <tr>
                     <td>{{p.code}}</td>
                     <td>{{p.name}}</td>
                     <td>{{p.price}} đ</td>
-                    <td><img src='{{p.image}}'/></td>
-                    <td></td>
+                    <td class="text-center">
+                        <img style="max-width:95%; max-height: 300px;" src='{{p.image}}'/>
+                    </td>
+                    <td class="text-center">
+                        <button onclick="deleteProduct( '{{p._id}}' )"  class="btn btn-sm btn-danger" type="button">
+                            Xoá
+                        </button>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
@@ -34,3 +45,20 @@
         Thêm sản phẩm
     </a>
 </div>
+<script>
+    function deleteProduct(id) {
+        if(!confirm('Bạn có chắc muốn xoá sản phẩm này?')) {
+            return;
+        }
+        //alert('id:' + id);
+        fetch('/delete-product/' + id, {method: 'DELETE'})
+            .then(resp => resp.json())
+            .then(result => {
+                if(!result.success) {
+                    alert('Lỗi xảy ra khi xoá sản phẩm');
+                }else {
+                    location.reload();
+                }
+            });
+    }
+</script>
