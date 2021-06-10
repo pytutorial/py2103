@@ -7,4 +7,5 @@ def index(request):
     return HttpResponse("Hello " + name)
 
 # cd hello_prj
+# dir --> confirm "manage.py" existed
 # python manage.py runserver
