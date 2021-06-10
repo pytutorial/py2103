@@ -1,0 +1,11 @@
+pip install django
+django-admin startproject <project_name>
+cd <project_name>
+python manage.py startapp <app_name>
+-- Edit file settings.py ---> Add <app_name> to INSTALLED_APPS (note: comma at the end of line )
+-- Create <app_name>/urls.py
+-- Include "<app_name>.urls" to <project_name>/urls.py
+-- Create method endpoint in <app_name>/views.py
+-- Assign endpoint in <app_name>/urls.py
+python manage.py migrate     # init session
+python manage.py runserver   # 127.0.0.1:8000/<endpoint>
