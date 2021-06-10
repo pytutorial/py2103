@@ -17,3 +17,15 @@ def login(request):
         #TODO: Validate username/password
         request.session['username'] = username
         return redirect('/app1/hello')
+
+# 127.0.0.1:8000/app1/send-mail
+def sendMail(request):
+    if request.method == 'GET':
+        return render(request, 'email_form.html')
+    else:
+        email = request.session.get('username','')
+        title = request.POST['title']
+        content = request.POST['content']
+        print(email, title, content)
+        return render(request, 'success.html',
+                    {'username': email})

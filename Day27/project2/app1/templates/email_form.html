@@ -1,0 +1,12 @@
+<!--app1/teplates/email_form.html-->
+<form method="POST">
+  {%csrf_token%}
+  <p>
+    Tiêu đề: <input name='title'/>
+  </p>
+  <p>
+    Nội dung: 
+    <textarea name='content'></textarea>
+  </p>
+  <button type="submit">Gửi đi</button>
+</form>
