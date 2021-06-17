@@ -9,3 +9,28 @@ python manage.py startapp <app_name>
 -- Assign endpoint in <app_name>/urls.py
 python manage.py migrate     # init session
 python manage.py runserver   # 127.0.0.1:8000/<endpoint>
+
+
+my_project
+    my_project
+        settings.py    (INSTALLED_APPS)
+        wsgi.py
+        urls.py ------------------------
+        ....                            |
+    app1                                |
+        urls.py  -----------------------|
+        views.py                        |
+    app2                                |
+        urls.py  -----------------------|
+        views.py
+    templates
+        index.html
+        form.html
+    static
+        images
+           img1.png
+        css
+           bootstrap.css
+        jss
+           jquery.js
+    
