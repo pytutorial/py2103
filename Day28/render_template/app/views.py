@@ -1,9 +1,11 @@
 from django.shortcuts import render
 
+PREFIX_URL = 'https://raw.githubusercontent.com/pytutorial/py2103/main/Day28/images'
+# f'{{prefixUrl}}/{{p.code}}.jpg'
 productList = [ 
     {'id': 1, 'code': 'IPX', 
         'name': 'IPhone', 'price': 10500000},
-        
+
     {'id': 2, 'code': 'IP11', 
         'name': 'IPhone 11', 'price': 11500000},
 
@@ -14,6 +16,7 @@ productList = [
 # Create your views here.
 def index(request):
     context = {
-        'productList': productList
+        'productList': productList,
+        'prefixUrl': PREFIX_URL
     }
     return render(request, 'index.html', context)
