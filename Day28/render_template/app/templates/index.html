@@ -1,2 +1,19 @@
 <!--app/templates/index.html-->
-Home page
+<table border="1">
+    <thead>
+        <tr>
+            <th>Mã</th>
+            <th>Tên</th>
+            <th>Giá sản phẩm</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in productList %}
+            <tr>
+                <td>{{ p.code }}</td>
+                <td>{{ p.name }}</td>
+                <td>{{ p.price }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
