@@ -20,3 +20,12 @@ def index(request):
         'prefixUrl': PREFIX_URL
     }
     return render(request, 'index.html', context)
+
+# 127.0.0.1:8000/view-product/1
+def viewProduct(request, id):
+    product = productList[int(id)-1]
+    context = {
+        'product': product,
+        'prefixUrl': PREFIX_URL,
+    }
+    return render(request, 'detail.html', context)
