@@ -1,0 +1,18 @@
+<!--app/templates/detail.html-->
+<p>
+    Mã sản phẩm: {{product.code}}
+</p>
+
+<p>
+    Tên sản phẩm : {{product.name}}
+</p>
+
+<p>
+    Đơn giá: {{product.price}} đ
+</p>
+
+<p>
+    Ảnh : <img 
+    style="max-height: 200px;" 
+    src='{{prefixUrl}}/{{product.code}}.jpg'/>
+</p>

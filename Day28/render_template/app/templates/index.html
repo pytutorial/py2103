@@ -15,8 +15,10 @@
       <td>{{ p.name }}</td>
       <td>{{ p.price }}</td>
       <td style="text-align: center;">
-        <img style="max-width: 95%; max-height: 200px;" 
-          src='{{prefixUrl}}/{{p.code}}.jpg'/>
+        <a href='/view-product/{{p.id}}'>
+          <img style="max-width: 95%; max-height: 200px;" 
+            src='{{prefixUrl}}/{{p.code}}.jpg'/>
+        </a>
       </td>
     </tr>
     {% endfor %}
