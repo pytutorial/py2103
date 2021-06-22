@@ -1,2 +1,6 @@
 <!--app/templates/index.html-->
-Home
+<form action="/upload" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="image">
+    <button type="submit">Upload</button>
+</form>
