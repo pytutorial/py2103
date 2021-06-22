@@ -5,39 +5,67 @@
     <input type="file" name="image">
     <button type="submit">Upload</button>
 </form>-->
+<!--
 <form id="fmt" onsubmit="event.preventDefault();login()">
-    {% csrf_token %}
-    <p>Tên đăng nhập: <input name="username"></p>
-    <p>Mật khẩu: <input name="password" type="password"> </p>
-    <button type="submit">Đăng nhập</button>
-    <div id='result'></div>
+  {% csrf_token %}
+  <p>Tên đăng nhập: <input name="username"></p>
+  <p>Mật khẩu: <input name="password" type="password"> </p>
+  <button type="submit">Đăng nhập</button>
+  <div id='result'></div>
+</form>-->
+<div id="todoList"></div>
+<form id="fmt" onsubmit="event.preventDefault();addTodo()">
+  {% csrf_token %}
+  <p>Công việc : <input name="todo"></p>
+  <button type="submit">Thêm</button>
 </form>
 <script>
-    async function login() {
-        var data = new FormData(document.getElementById('fmt'));
-        var resp = await fetch('/api/login', {
-            method: 'POST',
-            body: data,
-            headers: {"X-CSRFToken": "{{csrf_token}}"}
-        });
-        var result = await resp.json();
-        console.log(result);
-        if(result.error !=  '') {
-            document.getElementById('result').innerHTML = result.error;
-        }else {
-            document.getElementById('result').innerHTML = 'Đăng nhập thành công';
-        }
+  async function login() {
+    var data = new FormData(document.getElementById('fmt'));
+    var resp = await fetch('/api/login', {
+      method: 'POST',
+      body: data,
+      headers: { "X-CSRFToken": "{{csrf_token}}" }
+    });
+    var result = await resp.json();
+    console.log(result);
+    if (result.error != '') {
+      document.getElementById('result').innerHTML = result.error;
+    } else {
+      document.getElementById('result').innerHTML = 'Đăng nhập thành công';
     }
+  }
 
-    async function init(){
-        /*
-        fetch('/api/hello')
-            .then(resp => resp.json())
-            .then(data => alert(data.message));*/
-        var resp = await fetch('/api/hello');
-        var data = await resp.json();
-        //alert(data.message);
-        console.log(data.message);
-    }
-    init();
+  async function init() {
+    /*
+    fetch('/api/hello')
+        .then(resp => resp.json())
+        .then(data => alert(data.message));*/
+    var resp = await fetch('/api/hello');
+    var data = await resp.json();
+    //alert(data.message);
+    console.log(data.message);
+  }
+  init();
+
+  async function getTodos() {
+    var resp = await fetch('/api/get-todos');
+    var todos = await resp.json();
+    console.log(todos); 
+    document.getElementById('todoList').innerHTML = 
+                    todos.join('<br>');
+  }
+  getTodos();
+
+  async function addTodo() {
+    var data = new FormData(document.getElementById('fmt'));
+    var resp = await fetch('/api/add-todo', {
+      method: 'POST',
+      body: data,
+      headers: { "X-CSRFToken": "{{csrf_token}}" }
+    });
+    var result = await resp.json();
+    console.log(result);
+    getTodos();
+  }
 </script>

@@ -33,4 +33,22 @@ def login(request):
     else:
         error = ''
     result = json.dumps({'error': error})
-    return HttpResponse(result, content_type='application/json')
+    return HttpResponse(result, 
+        content_type='application/json')
+
+todoList = [
+    'Viết báo cáo doanh thu quý 2',
+    'Đi tiếp khách cùng sếp',
+]
+
+def getTodos(request):
+    result = json.dumps(todoList)
+    return HttpResponse(result, 
+        content_type='application/json')
+
+def addTodo(request):
+    todo = request.POST.get('todo')
+    todoList.append(todo)
+    result = json.dumps({'success': True})
+    return HttpResponse(result, 
+        content_type='application/json')
