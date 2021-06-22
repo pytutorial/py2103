@@ -21,3 +21,16 @@ def helloAPI(request):
 #127.0.0.1:8000
 def index(request):
     return render(request, 'index.html')
+
+def login(request):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    print('username=', username, 'password=', password)
+    if username != 'admin':
+        error = 'Tên đăng nhập không tồn tại'
+    elif password != '1234':
+        error = 'Mật khẩu không đúng'
+    else:
+        error = ''
+    result = json.dumps({'error': error})
+    return HttpResponse(result, content_type='application/json')

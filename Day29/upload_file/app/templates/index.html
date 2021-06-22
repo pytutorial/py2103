@@ -1,10 +1,28 @@
 <!--app/templates/index.html-->
+<!--
 <form action="/upload" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="file" name="image">
     <button type="submit">Upload</button>
+</form>-->
+<form id="fmt" onsubmit="event.preventDefault();login()">
+    {% csrf_token %}
+    <p>Tên đăng nhập: <input name="username"></p>
+    <p>Mật khẩu: <input name="password" type="password"> </p>
+    <button type="submit">Đăng nhập</button>
 </form>
 <script>
+    async function login() {
+        var data = new FormData(document.getElementById('fmt'));
+        var resp = await fetch('/api/login', {
+            method: 'POST',
+            body: data,
+            headers: {"X-CSRFToken": "{{csrf_token}}"}
+        });
+        var result = await resp.json();
+        console.log(result);
+    }
+
     async function init(){
         /*
         fetch('/api/hello')
