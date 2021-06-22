@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, HttpResponse
 from django.core.files.storage import FileSystemStorage
 
@@ -12,6 +13,11 @@ def upload(request):
         return HttpResponse(f'<a href="/{saved_path}">{file.name}</a>')
     else:
         return HttpResponse('No file upload')
-        
+
+def helloAPI(request):
+    data = {'message': 'Hello'}
+    return HttpResponse(json.dumps(data), content_type='application/json')
+
+#127.0.0.1:8000
 def index(request):
     return render(request, 'index.html')

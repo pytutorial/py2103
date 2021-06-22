@@ -4,3 +4,16 @@
     <input type="file" name="image">
     <button type="submit">Upload</button>
 </form>
+<script>
+    async function init(){
+        /*
+        fetch('/api/hello')
+            .then(resp => resp.json())
+            .then(data => alert(data.message));*/
+        var resp = await fetch('/api/hello');
+        var data = await resp.json();
+        //alert(data.message);
+        console.log(data.message);
+    }
+    init();
+</script>
