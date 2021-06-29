@@ -1,0 +1,78 @@
+
+for c in Customer.objects.all():
+    print(c.id, c.name, c.phone, c.address, c.gender)
+
+Customer.objects.filter(gender='MALE')
+
+Customer.objects.filter(phone__contains='0123')
+
+Customer.objects.filter(name__icontains='Nguyễn')
+
+# Tạo mới :
+Customer.objects.create(
+    name='Nguyễn Văn C',
+    phone='012345677',
+    address='Đà Nẵng'
+)
+
+c = Customer(
+    name='Nguyễn Văn D',
+    phone='012345676',
+    address='Hải Phòng'
+)  # In memory 
+c.save()
+
+# Select by id :
+c1 = Customer.objects.get(id=1)
+
+# Delete:
+c1.delete()
+
+# Update:
+c2 = Customer.objects.get(id=2)
+c2.name = 'Nguyễn Thị An'  # In memory
+c2.save()
+
+from app.models import *
+
+for p in Product.objects.filter(price__lt=1e6):
+    print(p.id, p.code, p.name, p.price)
+
+for p in Product.objects.filter(price__gt=1e5): 
+    print(p.id, p.code, p.name, p.price)
+
+# Gia tu 100.000  den 1000.000
+Product.objects.filter(price__gt=1e5, price__lt=1e6)
+Product.objects.filter(price__gt=1e5).filter(price__lt=1e6)
+
+# So sanh hoac
+# Ten/ma san pham chua cum tu tim kiem
+from django.db.models import Q
+keyword = '001'
+Product.objects.filter(Q(name__icontains=keyword) 
+                        | Q(code__icontains=keyword))
+
+# Phu dinh
+Product.objects.filter(~Q(price__gte=1e6)) # Duoi 1 trieu
+
+# Join
+Product.objects.filter(category__id=1)
+Product.objects.filter(category__name__icontains='tiêu dùng')
+
+# Bổ sung bảng Order:
+ - customer : Foreign --> Customer
+ - product: Foreign --> Product
+ - qty: Integer
+ - orderDate: DateTime 
+ - priceUnit: Integer 
+ - total: Integer 
+
+ + Tạo class trong models.py
+ + Đăng ký models trong admins.py
+ + Vào admin panel (django) thêm 1 số bản ghi  
+ + Thực hiện 1 số query:
+   . Nhập số điện thoại của KH --> liệt kê các đơn hàng của KH đã mua 
+   . Nhập mã sản phẩm --> liệt kê đơn hàng của sản phẩm đó 
+ + Viết hàm tạo order:
+   . Input : customer_id, product_id, qty
+   . Output : Save db
