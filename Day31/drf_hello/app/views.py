@@ -10,8 +10,8 @@ def hello(request):
 
 @api_view(['POST'])
 def login(request):  #  http:/127.0.0.1:8000/api/login
-    username = request.data.GET('username', '')
-    password = request.data.GET('password', '')
+    username = request.data.get('username', '')
+    password = request.data.get('password', '')
 
     if username != 'admin':
         return Response({'error': 'Tên đăng nhập không tồn tại'})
