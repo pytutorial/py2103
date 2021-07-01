@@ -1,5 +1,4 @@
 #app/views.py
-from re import S
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.serializers import ModelSerializer, DateTimeField
