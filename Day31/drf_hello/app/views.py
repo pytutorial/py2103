@@ -44,3 +44,9 @@ def getToDoList(request): # 127.0.0.1:8000/api/get-todo-list
     #        'status': todo.status
     #    })
     return Response(results)
+
+@api_view(['GET'])
+def getTodo(request, pk): # 127.0.0.1:8000/api/get-todo/1
+    todo = Todo.objects.get(pk=pk)
+    result = TodoSerializer(todo).data
+    return Response(result)
