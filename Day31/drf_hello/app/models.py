@@ -11,5 +11,25 @@ class Todo(models.Model):
     def __str__(self):
         return self.name
 
-# python manage.py makemigrations
-# python manage.py migrate
+class Category(models.Model):
+    code = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+class Product(models.Model):
+    categroy = models.ForeignKey(Category, on_delete=models.PROTECT)
+    code = models.CharField(max_length=20)
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    price = models.IntegerField()
+
+    def __str__(self):
+        return self.name
+
+# python manage.py makemigrations   --> SQL Generate
+# python manage.py migrate          --> SQL Execute
+# - Add Product/Category --> admins.py
+# - Goto admin panel --> add records
+# - Create API: List/get Category,Product,searchProduct: name,categoryCode,priceMin-priceMax

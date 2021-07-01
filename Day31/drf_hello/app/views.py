@@ -7,7 +7,7 @@ from .models import *
 class TodoSerializer(ModelSerializer):
     class Meta:
         model = Todo
-        fields = '__all__'
+        fields = ['id', 'name', 'status', 'createdDate'] #'__all__'
     
     createdDate = DateTimeField(format='%H:%M:%S %d/%m/%Y')
 
