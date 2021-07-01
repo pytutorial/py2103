@@ -19,7 +19,8 @@ class Category(models.Model):
         return self.name
 
 class Product(models.Model):
-    categroy = models.ForeignKey(Category, on_delete=models.PROTECT)
+    categroy = models.ForeignKey(Category,
+             on_delete=models.PROTECT)
     code = models.CharField(max_length=20)
     name = models.CharField(max_length=200)
     description = models.TextField(blank=True)

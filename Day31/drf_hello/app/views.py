@@ -1,4 +1,5 @@
 #app/views.py
+from re import S
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.serializers import ModelSerializer, DateTimeField
@@ -50,3 +51,62 @@ def getTodo(request, pk): # 127.0.0.1:8000/api/get-todo/1
     todo = Todo.objects.get(pk=pk)
     result = TodoSerializer(todo).data
     return Response(result)
+
+#=================================== Category =======================
+class CategorySerializer(ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+@api_view(['GET'])
+def getCategoryList(request):
+    categoryList = Category.objects.all()
+    serialzer = CategorySerializer(categoryList,many=True)
+    return Response(serialzer.data)
+
+@api_view(['GET'])
+def getCategory(request, pk):
+    category = Category.objects.get(pk=pk)
+    serilizer = CategorySerializer(category)
+    return Response(serilizer.data)
+
+#==================================== Product ======================
+class ProductSerializer(ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+@api_view(['GET'])
+def getProductList(request):
+    productList = Product.objects.all()
+    serialzer = ProductSerializer(productList,many=True)
+    return Response(serialzer.data)
+
+@api_view(['GET'])
+def getProduct(request, pk):
+    product = Product.objects.get(pk=pk)
+    serilizer = ProductSerializer(product)
+    return Response(serilizer.data)
+
+@api_view(['GET'])
+def searchProduct(request):
+    keyword = request.GET.get('keyword', '')
+    categoryCode = request.GET.get('categoryCode', '')
+    priceMin = request.GET.get('priceMin')
+    priceMax = request.GET.get('priceMax')
+
+    productList = Product.objects.all()
+    if keyword:
+        productList = productList.filter(
+                        name__icontains=keyword)
+    
+    if categoryCode:
+        productList = productList.filter(
+                category__code=categoryCode
+        )
+
+    if priceMin:
+        ...
+
+    if priceMax:
+        ...
