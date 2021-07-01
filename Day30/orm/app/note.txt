@@ -68,6 +68,7 @@ Product.objects.filter(category__name__icontains='tiêu dùng')
  - total: Integer 
 
  + Tạo class trong models.py
+ + Chạy lệnh migrations và migrate
  + Đăng ký models trong admins.py
  + Vào admin panel (django) thêm 1 số bản ghi  
  + Thực hiện 1 số query:
