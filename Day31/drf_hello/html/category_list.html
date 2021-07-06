@@ -1,0 +1,31 @@
+<div id='app'>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Mã</th>
+                <th>Tên</th>
+            </tr>
+        </thead>
+        <tbody id='data-rows'>
+        </tbody>
+    </table>
+</div>
+<script>
+    async function init() {
+        let resp = await fetch('http://127.0.0.1:8000/api/get-category-list');
+        let categoryList = await resp.json();
+        let html = categoryList.map(
+            (c,i) =>(
+                `<tr>
+                    <td>${i+1}</td>
+                    <td>${c.code}</td>
+                    <td>${c.name}</td>
+                </tr>`
+            )
+        ).join('');
+        console.log(categoryList);
+        document.getElementById('data-rows').innerHTML = html;
+    }
+    init();
+</script>
