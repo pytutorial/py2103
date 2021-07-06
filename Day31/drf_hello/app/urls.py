@@ -6,6 +6,7 @@ urlpatterns = [
     path('get-category-list', getCategoryList),
     path('get-category/<pk>', getCategory),
     path('create-category', createCategory),
+    path('update-category/<pk>', updateCategory),
 
     #===== Product =======
     path('get-product-list', getProductList),
@@ -20,3 +21,8 @@ urlpatterns = [
     path('login', login),
     path('hello', hello),
 ]
+
+{
+    "code": "ACER",
+    "name": "Acer -- test"
+}

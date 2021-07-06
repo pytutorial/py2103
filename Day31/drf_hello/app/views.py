@@ -79,6 +79,16 @@ def createCategory(request):
     else:
         return Response({'errors': serializer.errors})
 
+@api_view(['PUT'])
+def updateCategory(request, pk):
+    category = Category.objects.get(pk=pk)
+    serializer = CategorySerializer(data=request.data,
+                         instance=category)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'success': True})
+    else:
+        return Response({'errors': serializer.errors})
 #==================================== Product ======================
 class ProductSerializer(ModelSerializer):
     class Meta:
