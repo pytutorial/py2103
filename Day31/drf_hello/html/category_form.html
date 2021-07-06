@@ -19,6 +19,14 @@
             resp => resp.json()
         ).then(result =>  {
             console.log(result);
+            if(!result.success) {
+                for(var field in {code:'', name:''}) {
+                    document.getElementById(field + '_errors').innerHTML = 
+                            (result.errors[field]||[]).join('<br>');
+                }
+            }else {
+                location.href = 'category_list.html';
+            }
         });
         return false;
     }
