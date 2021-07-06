@@ -1,0 +1,43 @@
+<!--product_form.html-->
+<form id="fmt" method="POST" onsubmit="return saveProduct()">
+    <p>
+        Nhóm sản phẩm:
+        <select name="category">
+            <option value=''>---Chọn nhóm sản phẩm----</option>
+            <option value='1'>ACER</option>
+            <option value='2'>ASUS</option>
+            <option value='3'>LENOVO</option>
+        </select>
+        <span id='category_errors' style="color: red;"></span>
+    </p>
+    <p>
+        Mã: <input name='code'/> <span id='code_errors' style="color: red;"></span>
+    </p>
+    <p>
+        Tên: <input name='name'/> <span id='name_errors' style="color: red;"></span>
+    </p>
+    <p>
+        Đơn giá: <input name='price' type='number' min="0"/>
+        <span id='price_errors' style="color: red;"></span>
+    </p>
+    <button type='submit'>Lưu lại</button>
+</form>
+<script>
+    function saveProduct() {
+        var data = new FormData(document.getElementById('fmt'));
+        fetch('http://127.0.0.1:8000/api/create-product', {method: 'POST', body: data})
+            .then(resp => resp.json())
+            .then(result => {
+                console.log(result);
+                if(!result.success) {
+                    for(var field in {category:'', code:'', name:'', price: ''}) {
+                        document.getElementById(field + '_errors').innerHTML = 
+                                (result.errors[field]||[]).join('<br>');
+                    }
+                }else {
+                    location.href = 'product_list.html';
+                }
+            });
+        return false;
+    }
+</script>
