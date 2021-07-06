@@ -10,6 +10,7 @@ urlpatterns = [
     #===== Product =======
     path('get-product-list', getProductList),
     path('get-product/<pk>', getProduct),
+    path('create-product', createProduct),
     path('search-product', searchProduct),
     
     #===== Todo ==========

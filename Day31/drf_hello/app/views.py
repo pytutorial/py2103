@@ -1,4 +1,5 @@
 #app/views.py
+from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.serializers import ModelSerializer, DateTimeField
@@ -76,8 +77,7 @@ def createCategory(request):
         serializer.save()
         return Response({'success': True})
     else:
-        return Response(serializer.errors)
-
+        return Response({'errors': serializer.errors})
 
 #==================================== Product ======================
 class ProductSerializer(ModelSerializer):
@@ -96,6 +96,15 @@ def getProduct(request, pk):
     product = Product.objects.get(pk=pk)
     serilizer = ProductSerializer(product)
     return Response(serilizer.data)
+
+@api_view(['POST'])
+def createProduct(request):
+    serializer = ProductSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({"success": True})
+    else:
+        return Response({"errors": serializer.errors})
 
 @api_view(['GET'])
 def searchProduct(request):
