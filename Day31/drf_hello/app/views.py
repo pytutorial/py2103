@@ -116,6 +116,17 @@ def createProduct(request):
     else:
         return Response({"errors": serializer.errors})
 
+@api_view(['PUT'])
+def updateProduct(request, pk):
+    product = Product.objects.get(pk=pk)
+    serializer = ProductSerializer(data=request.data,
+                    instance=product)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'success': True})
+    else:
+        return Response({'errors': serializer.errors})
+
 @api_view(['GET'])
 def searchProduct(request):
     keyword = request.GET.get('keyword', '')

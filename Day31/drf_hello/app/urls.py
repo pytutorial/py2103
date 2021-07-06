@@ -12,6 +12,7 @@ urlpatterns = [
     path('get-product-list', getProductList),
     path('get-product/<pk>', getProduct),
     path('create-product', createProduct),
+    path('update-product/<pk>', updateProduct),
     path('search-product', searchProduct),
     
     #===== Todo ==========
