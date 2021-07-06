@@ -69,6 +69,16 @@ def getCategory(request, pk):
     serilizer = CategorySerializer(category)
     return Response(serilizer.data)
 
+@api_view(['POST'])
+def createCategory(request):
+    serializer = CategorySerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'success': True})
+    else:
+        return Response(serializer.errors)
+
+
 #==================================== Product ======================
 class ProductSerializer(ModelSerializer):
     class Meta:

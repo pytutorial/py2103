@@ -5,6 +5,7 @@ urlpatterns = [
     #===== Category ======
     path('get-category-list', getCategoryList),
     path('get-category/<pk>', getCategory),
+    path('create-category', createCategory),
 
     #===== Product =======
     path('get-product-list', getProductList),
