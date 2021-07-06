@@ -1,0 +1,25 @@
+<form id="fmt" method="POST" onsubmit="return saveCategory();">
+    <p>
+        Mã nhóm sản phẩm : <input name='code'/>
+        <span style="color:red" id='code_errors'></span>
+    </p>
+    <p>
+        Tên sản phẩm : <input name='name'/>
+        <span style="color:red" id='name_errors'></span>
+    </p>
+    <button type='submit'>Lưu lại</button>
+</form>
+<script>
+    function saveCategory() {
+        var data = new FormData(document.getElementById('fmt'));
+        fetch('http://127.0.0.1:8000/api/create-category', {
+            method: 'POST',
+            body: data
+        }).then(
+            resp => resp.json()
+        ).then(result =>  {
+            console.log(result);
+        });
+        return false;
+    }
+</script>
