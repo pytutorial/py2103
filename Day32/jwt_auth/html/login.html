@@ -1,0 +1,31 @@
+<!--login.html-->
+<form method="POST" id="fmt" onsubmit="return logIn()">
+    <p>
+        <label>Tên đăng nhập:</label>
+        <input name="username"/>
+    </p>
+    <p>
+        <label>Mật khẩu:</label>
+        <input type="password" name="password"/>
+    </p>
+    <button type='submit'>Đăng nhập</button>
+</form>
+
+<script>
+    function logIn() {
+        var data = new FormData(document.getElementById('fmt'));
+        fetch('http://127.0.0.1:8000/api/token', {method: 'POST', body:data})
+            .then(resp => resp.json())
+            .then(result => {
+                console.log(result);
+                if(result.access) {
+                    //TODO: Save token
+
+                }else {
+                    alert("Tên đăng nhập hoặc mật khẩu không đúng");
+                }
+            });
+        
+        return false;
+    }
+</script>
