@@ -3,6 +3,7 @@ from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.serializers import ModelSerializer, DateTimeField
+from rest_framework.serializers import CharField
 from .models import *
 
 class TodoSerializer(ModelSerializer):
@@ -91,6 +92,7 @@ def updateCategory(request, pk):
         return Response({'errors': serializer.errors})
 #==================================== Product ======================
 class ProductSerializer(ModelSerializer):
+    categoryName = CharField(source='category.name')
     class Meta:
         model = Product
         fields = '__all__'
@@ -99,13 +101,21 @@ class ProductSerializer(ModelSerializer):
 def getProductList(request):
     productList = Product.objects.all()
     serialzer = ProductSerializer(productList,many=True)
-    return Response(serialzer.data)
+    data = serialzer.data
+    #for i in range(len(data)):
+    #    product = productList[i]
+    #    data[i]['name'] = product.name + f'({product.category.name})'
+    for product, item in zip(productList, data):
+        item['name'] = product.name + f'({product.category.name})'
+    return Response(data)
 
 @api_view(['GET'])
 def getProduct(request, pk):
     product = Product.objects.get(pk=pk)
-    serilizer = ProductSerializer(product)
-    return Response(serilizer.data)
+    serializer = ProductSerializer(product)
+    data = serializer.data
+    data['name'] = product.name + f'({product.category.name})'
+    return Response(data)
 
 @api_view(['POST'])
 def createProduct(request):
@@ -127,14 +137,15 @@ def updateProduct(request, pk):
     else:
         return Response({'errors': serializer.errors})
 
-@api_view(['GET'])
+@api_view(['GET'])#127.0.0.1:8000/api/search-product?priceMin=5000000&priceMax=10000000
 def searchProduct(request):
     keyword = request.GET.get('keyword', '')
     categoryCode = request.GET.get('categoryCode', '')
-    priceMin = request.GET.get('priceMin')
-    priceMax = request.GET.get('priceMax')
+    priceMin = request.GET.get('priceMin', '')
+    priceMax = request.GET.get('priceMax', '')
 
     productList = Product.objects.all()
+
     if keyword:
         productList = productList.filter(
                         name__icontains=keyword)
@@ -144,8 +155,11 @@ def searchProduct(request):
                 category__code=categoryCode
         )
 
-    if priceMin:
-        ...
+    if priceMin.isdigit():
+        productList = productList.filter(price__gte=priceMin)
 
-    if priceMax:
-        ...
+    if priceMax.isdigit():
+        productList = productList.filter(price__lte=priceMax)
+    
+    serializer = ProductSerializer(productList, many=True)
+    return Response(serializer.data)

@@ -29,6 +29,25 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+class Customer(models.Model):
+    fullname = models.CharField(max_length=100)
+    phone = models.CharField(max_length=20)
+    address = models.CharField(max_length=200)
+    createdDate = models.DateTimeField(auto_now_add=True)
+
+class Order(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.PROTECT)
+    orderDate = models.DateTimeField()
+    total = models.IntegerField()
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.PROTECT)
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)
+    qty = models.IntegerField()
+    priceUnit = models.IntegerField()
+    total = models.IntegerField()
+
+
 # python manage.py makemigrations   --> SQL Generate
 # python manage.py migrate          --> SQL Execute
 # - Add Product/Category --> admins.py
