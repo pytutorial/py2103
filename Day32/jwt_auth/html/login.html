@@ -19,8 +19,8 @@
             .then(result => {
                 console.log(result);
                 if(result.access) {
-                    //TODO: Save token
-
+                    localStorage.setItem('token', result.access);
+                    location.href = 'test.html';
                 }else {
                     alert("Tên đăng nhập hoặc mật khẩu không đúng");
                 }

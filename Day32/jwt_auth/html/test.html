@@ -1,6 +1,10 @@
 <!--test.html-->
+<div id='app'></div>
 <script>
-    fetch('http://127.0.0.1:8000/api/hello')
+    var headers = {Authorization : 'Bearer ' 
+                + localStorage.getItem('token')};
+
+    fetch('http://127.0.0.1:8000/api/hello', {headers})
         .then(resp => resp.json())
         .then(result => console.log(result));
 </script>
