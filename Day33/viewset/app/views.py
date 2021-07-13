@@ -41,6 +41,8 @@ class PlayerViewSet(ModelViewSet):
 
     @action(detail=False, methods=['get']) # 127.0.0.1:8000/api/player/search?matchesMin=100
     def search(self, request):
+        start = int(request.GET.get('start', 0))
+        end = int(request.GET.get('end', start + 10))
 
         ageFrom = request.GET.get('ageFrom')
         ageTo = request.GET.get('ageTo')
@@ -62,6 +64,8 @@ class PlayerViewSet(ModelViewSet):
 
         if goalsMin:
             playerList = playerList.filter(goals__gte=goalsMin)
+        
+        playerList = playerList[start:end]
         
         data = PlayerSerializer(instance=playerList,many=True).data
         return Response(data)
