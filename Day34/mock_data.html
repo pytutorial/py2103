@@ -7,9 +7,10 @@
         <thead>
             <tr> 
                 <th style="width: 5%;">STT</th>
-                <th style="width: 25%;">Mã</th> 
-                <th style="width: 40%;">Tên</th> 
-                <th style="width: 30%;">Đơn giá</th>
+                <th style="width: 20%;">Mã</th> 
+                <th style="width: 25%;">Tên</th> 
+                <th style="width: 25%;">Đơn giá</th>
+                <th style="width: 25%;">Ảnh</th>
             </tr>
         </thead>
         <tbody>
@@ -18,6 +19,10 @@
                 <td>{{product.code}}</td>
                 <td>{{product.name}}</td>
                 <td>{{product.price}} đ</td>
+                <td class="text-center">
+                    <img :src=" 'http://127.0.0.1:8000' + product.image"
+                        style="max-width: 100%; max-height: 200px;"/>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -27,7 +32,8 @@
         el: "#app",
         data: { productList: [] },
         mounted: async function() {
-            let url = 'https://raw.githubusercontent.com/pytutorial/py2103/main/Day34/product_list.json';
+            //let url = 'https://raw.githubusercontent.com/pytutorial/py2103/main/Day34/product_list.json';
+            let url = 'http://127.0.0.1:8000/api/get-product-list';
             let resp = await fetch(url);
             this.productList = await resp.json();
             console.log(this.productList);

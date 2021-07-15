@@ -8,3 +8,5 @@ class Product(models.Model):
     description = models.CharField(max_length=500, blank=True)
     price = models.IntegerField()
     image = models.ImageField(upload_to='static/images')
+
+    def __str__(self): return self.name
