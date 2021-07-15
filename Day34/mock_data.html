@@ -6,13 +6,15 @@
     <table class="table table-bordered">
         <thead>
             <tr> 
-                <th style="width: 30%;">Mã</th> 
+                <th style="width: 5%;">STT</th>
+                <th style="width: 25%;">Mã</th> 
                 <th style="width: 40%;">Tên</th> 
                 <th style="width: 30%;">Đơn giá</th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="product in productList">
+            <tr v-for="(product,index) in productList" :key="index">
+                <td class="text-center">{{index+1}}</td>
                 <td>{{product.code}}</td>
                 <td>{{product.name}}</td>
                 <td>{{product.price}} đ</td>
