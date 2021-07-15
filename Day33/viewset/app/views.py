@@ -66,10 +66,19 @@ class PlayerViewSet(ModelViewSet):
             playerList = playerList.filter(goals__gte=goalsMin)
         
         playerList = playerList[start:end]
-        
+
         data = PlayerSerializer(instance=playerList,many=True).data
         return Response(data)
 
 @api_view(['GET'])
 def hello(request):
     return Response({'message': 'Hello'})
+
+@api_view(['POST'])
+def createPlayer(request):
+    serializer = PlayerSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response({'success': True})
+    else:
+        return Response({'errors': serializer.errors})
