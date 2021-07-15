@@ -4,10 +4,22 @@
 <div id="app">
     <input v-model='name'/>
     <input :value='name'/>
+    <select :value="gender">
+        <option value="">-----</option>
+        <option value="male">Nam</option>
+        <option value="female">Nữ</option>
+    </select>
+    <br>
+    <input type="checkbox" :checked="gender=='male'" disabled> Nam 
+    <br>
+    <input type="checkbox" :checked="gender=='female'" disabled> Nữ
 </div>
 <script>
     new Vue({
         el: '#app',
-        data: {name: 'Nguyen Van A'},
+        data: {
+            name: 'Nguyen Van A',
+            gender: 'male'
+        },
     })
 </script>
