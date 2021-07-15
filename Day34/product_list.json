@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "code": "IPX",
+        "name": "IPhone X",
+        "price": 1050000
+    },
+    {
+        "id": 2,
+        "code": "IP11",
+        "name": "IPhone 11",
+        "price": 1150000
+    },
+    {
+        "id": 3,
+        "code": "IP12",
+        "name": "IPhone 12",
+        "price": 1250000
+    }
+]
