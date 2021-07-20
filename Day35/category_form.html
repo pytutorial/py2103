@@ -24,7 +24,16 @@
         },
         methods: {
             save: async function(){
-                alert(this.code + ':' + this.name);
+                //alert(this.code + ':' + this.name);
+                let data = {code:this.code, name:this.name};
+                let headers = {'Content-Type': 'application/json'};
+                let resp = await fetch(this.baseUrl +'/api/create-category', {
+                    body: JSON.stringify(data),
+                    headers: headers,
+                    method: 'POST'
+                });
+                let result = await resp.json();
+                console.log('result=', result);
             }
         }
     })
