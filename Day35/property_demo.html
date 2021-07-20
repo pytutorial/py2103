@@ -1,0 +1,30 @@
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<div id="app">
+    <form>
+        <div>
+            Tên đăng nhập: <input>
+            <Error :message="errors.username">
+        </div>
+        <div>
+            Mật khẩu: <input> 
+            <Error :message="errors.password">
+        </div>
+    </form>
+</div>
+<script>
+    Vue.component('Error', {
+        props: ['message'],
+        template: `<div style="color:red; font-size:13px">{{message}}</div>`
+    });
+    new Vue({
+        el: "#app",
+        data: {
+            errors: {
+                username: 'Tên đăng nhập không tồn tại',
+                password: 'Mật khẩu không đúng'
+            }
+        }
+    })
+</script>
