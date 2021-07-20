@@ -1,0 +1,33 @@
+<!--custom_event.html-->
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<div id="app">
+    {{counter}}
+    <!--<button @click="addOne()">Increase</button>-->
+    <child-form v-on:increase="addOne"></child-form>
+</div>
+
+<script>
+    Vue.component('ChildForm', {
+        template: `
+            <div>
+                <button @click="btnClick()">Increase</button>
+            </div>
+        `,
+        methods: {
+            btnClick: function() {
+                this.$emit('increase', 1);
+            }
+        }
+    });
+    new Vue({
+        el: '#app',
+        data: {counter: 0},
+        methods: {
+            addOne: function() {
+                this.counter += 1;
+            }
+        }
+    })
+</script>
