@@ -1,0 +1,38 @@
+<!--event_demo.html-->
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+<div id="app">
+    <form>
+        <div>
+            Tên đăng nhập : <input v-model="username"/>
+            <div style="color:red">{{errors.username}}</div>
+        </div>
+        <div>
+            Mật khẩu : <input type="password" v-model="password"/>
+            <div style="color:red">{{errors.password}}</div>
+        </div>
+        <button type="button" @click="login()">Đăng nhập</button>
+    </form>
+</div>
+<script>
+    new Vue({
+        el: "#app",
+        data : {
+            username: '', 
+            password: '',
+            errors: {username: '', password:''}
+        },
+        methods: {
+            login: function() {
+                this.errors = {};
+                if(this.username != 'admin') {
+                    this.errors.username = 'Tên đăng nhập không tồn tại';
+                }
+                if(this.password != '123') {
+                    this.errors.password = 'Mật khẩu không đúng';
+                }
+            }
+        }
+    })
+</script>
