@@ -1,0 +1,26 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<div id="app">
+    {{product.name}} - {{product?.category?.name}}
+    {{ add(x,y) }}
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            x: 1, y:2,
+            product: {
+                name: 'IPhone X',
+                cateogry: {name: 'IPhone'}
+            }
+        },
+        methods: {
+            add: function(x, y) {
+                return x + y;
+            }
+        },
+        created: function() {
+            //console.log(this.product.category.name);//missing this.
+        }
+    })
+</script>
