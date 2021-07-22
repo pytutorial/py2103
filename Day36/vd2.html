@@ -1,0 +1,23 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<div id="app">
+    <input placeholder="Số lượng" type="number" min="1" v-model='qty'>
+    Tổng tiền: {{getTotal()}}
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            qty: 1,
+            product: {
+                name: 'IPhone X',
+                price: 1050000
+            }
+        },
+        methods: {
+            getTotal: function () {
+                return this.qty*this.product.price;
+            }
+        }
+    })
+</script>
