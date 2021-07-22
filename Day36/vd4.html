@@ -1,0 +1,46 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<div id="app">
+    <table border="1">
+        <thead>
+            <tr>
+                <td>STT</td>
+                <td>Sản phẩm</td>
+                <td>Đơn giá</td>
+                <td>Số lượng</td>
+                <td>Thành tiền</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for='(p,i) in productList' :key="i">
+                <td>{{i+1}}</td>
+                <td>{{p.name}}</td>
+                <td>{{p.price}} đ</td>
+                <td><input type="number" min="1" v-model='qtyList[i]'></td>
+                <td>{{ p.price * qtyList[i] }}đ</td>
+            </tr>
+        </tbody>
+    </table>
+    <label>Tổng số tiền: {{getTotal()}}</label>
+</div>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            productList: [
+                {id: 1, name: 'IPhone X',price: 1050000},
+                {id: 2, name: 'IPhone 11',price: 1150000},
+                {id: 3, name: 'IPhone 12',price: 1250000},
+            ],
+            qtyList: [1, 1, 1]
+        },
+        methods: {
+            getTotal: function() {
+                let total = 0;
+                for(let i = 0; i < this.productList.length; i++) {
+                    total += this.productList[i].price * this.qtyList[i];
+                }
+                return total;
+            }
+        }
+    })
+</script>
