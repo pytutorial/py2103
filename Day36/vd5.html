@@ -1,0 +1,51 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<div id="app" class="container mt-3">
+    <div class="form-group">
+        <label>Công việc:</label>
+        <input class="form-control" v-model='newTodo.name'>
+    </div>
+    <div class="form-group">
+        <label>Mô tả:</label>
+        <textarea class="form-control" v-model='newTodo.description'></textarea>
+    </div>
+    <button @click="addTodo()" class="btn btn-primary">Thêm</button>
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên việc</th>
+                <th>Mô tả</th>
+                <th>Ngày tạo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(todo, index) in todoList" :key="index">
+                <td>{{index+1}}</td>
+                <td>{{todo.name}}</td>
+                <td>{{todo.description}}</td>
+                <td>{{formatDate(todo.createdDate)}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            newTodo: {name: '', description: ''},
+            todoList: []
+        },
+        methods: {
+            formatDate(date) {
+                return date.toISOString()
+            },
+            addTodo: function() {
+                console.log(this.newTodo);
+                this.todoList.push({...this.newTodo, createdDate: new Date()});
+                console.log(this.todoList);
+                this.newTodo = {name: '', description:''};
+            }
+        }
+    });
+</script>
