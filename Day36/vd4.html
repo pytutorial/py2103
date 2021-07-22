@@ -1,22 +1,24 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-<div id="app">
-    <table border="1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<div id="app" class="container mt-3">
+    <table class="table table-bordered">
         <thead>
-            <tr>
-                <td>STT</td>
-                <td>Sản phẩm</td>
-                <td>Đơn giá</td>
-                <td>Số lượng</td>
-                <td>Thành tiền</td>
+            <tr class="text-center">
+                <th style="width: 10%;">STT</th>
+                <th style="width: 30%;">Sản phẩm</th>
+                <th style="width: 20%;">Đơn giá</th>
+                <th style="width: 20%;">Số lượng</th>
+                <th style="width: 20%;">Thành tiền</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for='(p,i) in productList' :key="i">
-                <td>{{i+1}}</td>
+                <td class="text-center">{{i+1}}</td>
                 <td>{{p.name}}</td>
-                <td>{{p.price}} đ</td>
-                <td><input type="number" min="1" v-model='qtyList[i]'></td>
-                <td>{{ p.price * qtyList[i] }}đ</td>
+                <td class="text-center">{{p.price}} đ</td>
+                <td><input class="form-control text-center" type="number" 
+                      min="1" v-model='qtyList[i]'></td>
+                <td class="text-center">{{ p.price * qtyList[i] }}đ</td>
             </tr>
         </tbody>
     </table>
