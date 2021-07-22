@@ -1,0 +1,36 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<div id="app">
+    <label>Chọn sản phẩm:</label> 
+    <select v-model="productId">
+        <option value>-------</option>
+        <option v-for="p in productList" :value="p.id">{{p.name}}</option>
+    </select>
+    
+    <br><label>Chọn số lượng:</label>
+    <input placeholder="Số lượng" type="number" min="1" v-model='qty'>
+    <br><label>Tổng tiền: {{getTotal()}}</label>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            qty: 1,
+            productId: '',
+            productList: [
+                {id: 1, name: 'IPhone X',price: 1050000},
+                {id: 2, name: 'IPhone 11',price: 1150000},
+                {id: 3, name: 'IPhone 12',price: 1250000},
+                {id: 4, name: 'IPhone 13',price: 1350000}
+            ]
+        },
+        methods: {
+            getTotal: function () {
+                let product = this.productList.find(p => p.id==this.productId);
+                if(product){
+                    return this.qty*product.price;
+                }
+            }
+        }
+    })
+</script>
