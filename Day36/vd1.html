@@ -1,21 +1,18 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <div id="app">
-    <input placeholder="Họ" v-model="lastName">
-    <input placeholder="Tên đệm" v-model="middleName">
-    <input placeholder="Tên" v-model="firstName">
-    <br> Tên đầy đủ: {{ getFullName()  }}
+  <input v-model="name">
 </div>
 <script>
-    new Vue({
-        el: '#app',
-        data : {
-            lastName: '', middleName: '', firstName:''
-        },
-        methods: {
-            getFullName: function() {
-                return this.lastName + ' ' + this.middleName + ' ' + this.firstName;
-            }
-        }
-        //TODO
-    })
+  new Vue({
+    el: '#app',
+    data: {
+      name: ''
+    },
+    watch: {
+      name(newVal, oldVal) {
+        console.log('Giá trị cũ:', oldVal);
+        console.log('Giá trị mới:', newVal);
+      }
+    }
+  })
 </script>

@@ -1,0 +1,27 @@
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+  integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
+
+<div id="app">
+</div>
+
+<script>
+    new Vue({
+      el: '#app',
+      data: {
+        all_items: [],    // client paging only
+        items: [],        // displayed items (pageSize : 10-20)
+        page: 1,
+        pageSize: 5,
+        total: 0,         // all_items.length
+      },
+      mounted: async function() {
+        let url = 'https://raw.githubusercontent.com/pytutorial/py2103/main/Day37/customers.json';
+        let resp = await fetch(url);
+        this.all_items = await resp.json();
+        console.log(this.all_items);
+      }
+    })
+</script>
