@@ -11,9 +11,13 @@ class CustomerSerializer(ModelSerializer):
 
 @api_view(['GET'])
 def searchCustomer(request):
+    start = int(request.GET.get('start') or 0)
+    count = int(request.GET.get('count') or 10)
     lst = Customer.objects.all()
+    total = lst.count()
+    lst = lst[start:start+count]
     data = CustomerSerializer(instance=lst, many=True).data
-    return Response(data)
+    return Response({'items': data, 'total': total})
 
 @api_view(['GET'])
 def hello(request):
