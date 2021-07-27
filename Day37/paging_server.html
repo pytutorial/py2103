@@ -5,6 +5,14 @@
 <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
 
 <div id="app" class="container mt-3">
+  <div class="row">
+    <div class="col-6">
+      <form id="fmt" @submit.prevent="search()">
+        <input class="form-control" name="keyword" 
+          placeholder="Tìm theo tên/sđt">
+      </form>
+    </div>
+  </div>
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -40,6 +48,7 @@
         page: 1,
         pageSize: 5,
         total: 0,         // all_items.length
+        keyword: '',
       },
       computed: {
         num_page() { return Math.ceil(this.total/this.pageSize);} ,
@@ -51,9 +60,16 @@
         }
       },
       methods: {
+        search: async function() {
+          let data = new FormData(document.getElementById('fmt'));
+          this.keyword = data.get('keyword');
+          alert('keyword=' + this.keyword);
+          this.fetch_data();
+        },
         fetch_data: async function(){
           let start = (this.page - 1) * this.pageSize;
-          let url = `http://127.0.0.1:8000/api/search-customer?start=${start}&count=`+this.pageSize;
+          let url = `http://127.0.0.1:8000/api/search-customer?keyword=${this.keyword}&start=${start}&count=`+this.pageSize;
+          console.log(url);
           let resp = await fetch(url);
           let result = await resp.json();
           console.log(result);

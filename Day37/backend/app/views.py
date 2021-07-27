@@ -13,7 +13,8 @@ class CustomerSerializer(ModelSerializer):
 def searchCustomer(request):
     start = int(request.GET.get('start') or 0)
     count = int(request.GET.get('count') or 10)
-    lst = Customer.objects.all()
+    keyword = request.GET.get('keyword', '')
+    lst = Customer.objects.filter(name__icontains=keyword)
     total = lst.count()
     lst = lst[start:start+count]
     data = CustomerSerializer(instance=lst, many=True).data
