@@ -46,18 +46,23 @@
         start() { return (this.page - 1) * this.pageSize; }
       },
       watch: {
-        page(new_val, val) {
+        page: async function(new_val, val) {
+          this.fetch_data();
+        }
+      },
+      methods: {
+        fetch_data: async function(){
           let start = (this.page - 1) * this.pageSize;
-          this.items = this.all_items.slice(start, start+this.pageSize);
+          let url = `http://127.0.0.1:8000/api/search-customer?start=${start}&count=`+this.pageSize;
+          let resp = await fetch(url);
+          let result = await resp.json();
+          console.log(result);
+          this.total = result.total;
+          this.items = result.items;
         }
       },
       mounted: async function() {
-        let url = 'https://raw.githubusercontent.com/pytutorial/py2103/main/Day37/customers.json';
-        let resp = await fetch(url);
-        this.all_items = await resp.json();
-        console.log(this.all_items);
-        this.total = this.all_items.length;
-        this.items = this.all_items.slice(0, this.pageSize);
+        this.fetch_data();
       }
     })
 </script>
