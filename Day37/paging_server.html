@@ -8,7 +8,7 @@
   <div class="row">
     <div class="col-6">
       <form id="fmt" @submit.prevent="search()">
-        <input class="form-control" name="keyword" 
+        <input :value="keyword" class="form-control" name="keyword" 
           placeholder="Tìm theo tên/sđt">
       </form>
     </div>
@@ -63,7 +63,7 @@
         search: async function() {
           let data = new FormData(document.getElementById('fmt'));
           this.keyword = data.get('keyword');
-          //alert('keyword=' + this.keyword);
+          this.page = 1;
           this.fetch_data();
         },
         fetch_data: async function(){
