@@ -6,9 +6,10 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router@3.5.2/dist/vue-router.js"></script>
 
-
-<body id="page-top">
+<div id="app">
   <div id="wrapper">
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark">
       <a class="sidebar-brand d-flex align-items-center" href="index.html">        
@@ -17,10 +18,11 @@
 
       <hr class="sidebar-divider my-0">
 
-      <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+      <li class="nav-item" :class="{active:current_tab==1}">
+        <router-link class="nav-link" to="/">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span></a>
+          <span>Dashboard</span>
+        </router-link>
       </li>
 
       <hr class="sidebar-divider">
@@ -29,18 +31,18 @@
         Interface
       </div>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+      <li class="nav-item" :class="{active:current_tab==2}">
+        <router-link class="nav-link collapsed" to="/components">
           <i class="fas fa-fw fa-cog"></i>
           <span>Components</span>
-        </a>
+        </router-link>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
+      <li class="nav-item" :class="{active:current_tab==3}">
+        <router-link class="nav-link collapsed" to="/utilities">
           <i class="fas fa-fw fa-wrench"></i>
           <span>Utilities</span>
-        </a>        
+        </router-link>        
       </li>
 
       <!-- Sidebar Toggler (Sidebar) -->
@@ -74,13 +76,33 @@
         </nav>
 
         <div class="container-fluid">
-          Page content
+            <router-view></router-view>
         </div>
 
       </div> <!-- End of Main Content -->      
     </div> <!-- End of Content Wrapper -->
-  </div> <!-- End of Page Wrapper -->    
-  
-</body>
+  </div> <!-- End of Page Wrapper -->  
+</div>
 
-<script src="asset/js/sb-admin-2.min.js"></script>
+<script>
+    const Dashboard =  { template: '<h3>Dashboard</h3>' };
+    const Components = { template: '<h3>Components</h3>' };
+    const Utilities =  { template: '<h3>Utilities</h3>' };
+    Vue.use(VueRouter);
+    const router = new VueRouter({
+        routes: [
+            {path:'/' , component: Dashboard,     meta:{tab:1}},
+            {path: '/components', component: Components, meta:{tab:2}},
+            {path: '/utilities', component: Utilities, meta:{tab:3}},
+        ]
+    });
+    new Vue({
+        el: '#app',
+        router:router,
+        computed:{
+            current_tab: function() {
+                return this.$route.meta.tab;
+            }
+        }
+    });
+</script>
