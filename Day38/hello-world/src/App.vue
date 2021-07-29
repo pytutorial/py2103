@@ -6,18 +6,18 @@
           class="nav-item nav-link"
           :class="{ active: current_tab == 1 }"
           to="/"
-          >Tab 1</router-link
+          >Page 1</router-link
         >
         <router-link
           class="nav-item nav-link"
           :class="{ active: current_tab == 2 }"
-          to="/tab2"
-          >Tab 2</router-link
+          to="/page2"
+          >Page 2</router-link
         >
         <router-link
           class="nav-item nav-link"
           :class="{ active: current_tab == 3 }"
-          to="/tab3"
+          to="/page3"
           >Tab 3</router-link
         >
       </div>
