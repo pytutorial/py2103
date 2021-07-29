@@ -1,0 +1,8 @@
+B1: Copy index.html + asset files 
+B2: Tạo thẻ <div id='app'> và bọc html lại
+B3: Thêm script vue + vue router ở đầu trang
+B4: Khai báo các component tương ứng với các trang con
+B5: Khai báo path + router + thêm router vào cho app
+B6: Sửa phần main content --> <router-view></router-view>
+B7: Sửa các thẻ a trên menu thành router-link
+B8: Gắn trạng thái active cho từng tab (nếu cần) ~ sử dụng meta của router để tính ra current_tab
