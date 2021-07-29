@@ -4,19 +4,19 @@
       <div class="navbar-nav">
         <router-link
           class="nav-item nav-link"
-          :class="{ active: current_tab == 1 }"
+          :class="{ active: current_page == 1 }"
           to="/"
           >Page 1</router-link
         >
         <router-link
           class="nav-item nav-link"
-          :class="{ active: current_tab == 2 }"
+          :class="{ active: current_page == 2 }"
           to="/page2"
           >Page 2</router-link
         >
         <router-link
           class="nav-item nav-link"
-          :class="{ active: current_tab == 3 }"
+          :class="{ active: current_page == 3 }"
           to="/page3"
           >Tab 3</router-link
         >
@@ -43,7 +43,7 @@
         </li>
       </ul>
     </nav>
-
+    
     <div class="container mt-3">
       <router-view></router-view>
     </div>
@@ -52,8 +52,8 @@
 <script>
 export default {
   computed:{
-      current_tab: function() {
-          return this.$route.meta.tab;
+      current_page: function() {
+          return this.$route.meta.page;
       }
   }
 }
