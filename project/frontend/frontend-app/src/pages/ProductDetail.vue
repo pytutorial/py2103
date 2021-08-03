@@ -22,7 +22,7 @@
           </tr>
         </table>
         <br />
-        <a class="btn btn-secondary" href="index.html">Quay lại</a>
+        <a class="btn btn-secondary mr-1" href="index.html">Quay lại</a>
         <a class="btn btn-primary" href="order_product.html">Mua hàng</a>
       </div>
     </div>
