@@ -1,3 +1,10 @@
 <template>
-    <div>Component 1</div>
+    <div><button @click="btnClick()">Increase</button></div>
 </template>
+<script>
+export default {
+    methods: {
+        btnClick: function() {this.$store.commit('increment');}
+    }
+}
+</script>

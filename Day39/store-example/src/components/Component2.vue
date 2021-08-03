@@ -1,3 +1,12 @@
 <template>
-    <div>Component 2</div>
+    <div>{{count}}</div>
 </template>
+<script>
+export default{
+    computed: {
+        count() {
+            return this.$store.state.count;
+        }
+    }
+}
+</script>
