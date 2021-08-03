@@ -62,7 +62,7 @@
         <ul class="list-unstyled row">
           <li class="list-item col-sm-4 mt-3">
             <div class="item-container">
-              <a href="view_product.html?id=1" class="product-item">
+              <router-link to="view-product" class="product-item">
                 <img
                   src="https://raw.githubusercontent.com/pytutorial/themes/master/shop_themes/images/sample.jpg"
                   class="product-image"
@@ -76,7 +76,7 @@
                     <span class="price">6.500.000 ₫</span>
                   </div>
                 </div>
-              </a>
+              </router-link>
             </div>
           </li>
         </ul>

@@ -44,7 +44,7 @@
           </tr>
         </tbody>
       </table>
-      <a href="thank_you.html" class="btn btn-primary"> Đặt mua </a>
+      <router-link to="/thank-you" class="btn btn-primary">Đặt mua</router-link>
     </form>
   </div>
 </template>

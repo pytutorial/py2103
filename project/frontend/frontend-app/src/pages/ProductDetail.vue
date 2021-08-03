@@ -22,8 +22,8 @@
           </tr>
         </table>
         <br />
-        <a class="btn btn-secondary mr-1" href="index.html">Quay lại</a>
-        <a class="btn btn-primary" href="order_product.html">Mua hàng</a>
+        <router-link class="btn btn-secondary mr-1" to="/">Quay lại</router-link>
+        <router-link class="btn btn-primary" to="/order-product">Mua hàng</router-link>
       </div>
     </div>
   </div>
