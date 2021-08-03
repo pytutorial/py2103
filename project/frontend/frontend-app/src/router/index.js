@@ -10,8 +10,8 @@ Vue.use(VueRouter);
 const router = new VueRouter({
     routes: [
         {path:'/' , component: ProductList, meta:{page:1}},
-        {path: '/view-product', component: ProductDetail, meta:{page:2}},
-        {path: '/order-product', component: ProductOrder, meta:{page:3}},
+        {path: '/view-product/:id', component: ProductDetail, meta:{page:2}},
+        {path: '/order-product/:id', component: ProductOrder, meta:{page:3}},
         {path: '/thank-you', component: ThankYou, meta:{page:4}},
     ]
 });

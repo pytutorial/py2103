@@ -23,7 +23,7 @@
         </table>
         <br />
         <router-link class="btn btn-secondary mr-1" to="/">Quay lại</router-link>
-        <router-link class="btn btn-primary" to="/order-product">Mua hàng</router-link>
+        <router-link class="btn btn-primary" to="/order-product/1">Mua hàng</router-link>
       </div>
     </div>
   </div>

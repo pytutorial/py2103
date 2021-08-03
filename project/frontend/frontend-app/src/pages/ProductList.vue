@@ -62,7 +62,7 @@
         <ul class="list-unstyled row">
           <li class="list-item col-sm-4 mt-3">
             <div class="item-container">
-              <router-link to="view-product" class="product-item">
+              <router-link to="view-product/1" class="product-item">
                 <img
                   src="https://raw.githubusercontent.com/pytutorial/themes/master/shop_themes/images/sample.jpg"
                   class="product-image"
