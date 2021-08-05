@@ -88,18 +88,23 @@
 <script>
 export default {
     data: () => ({
-        keyword: "",
-        page: 1,
-        total: 0,
-        items: [],
-        pageSize: 5,
-        baseUrl: 'http://127.0.0.1:8000'
+      categoryList:[],
+      keyword: "",
+      page: 1,
+      total: 0,
+      items: [],
+      pageSize: 5,
+      baseUrl: 'http://127.0.0.1:8000'
     }),
     methods: {
         fetch_data: async function(){
           let resp = await fetch(this.baseUrl+'/api/product');
           this.items = await resp.json();
           console.log(this.items);
+          //TODO: Fetch categoryList
+          resp = await fetch(this.baseUrl+'/api/category');
+          this.categoryList = await resp.json()
+          console.log(this.categoryList);
         }
     },
     mounted: async function(){
