@@ -4,21 +4,21 @@
       <div class="col-6">
         <img
           class="product-detail-image"
-          src="https://raw.githubusercontent.com/pytutorial/themes/master/shop_themes/images/sample.jpg"
+          :src="product.image"
         />
       </div>
 
       <div class="col-6 mt-5">
-        <div class="product-detail-title">Acer 001</div>
+        <div class="product-detail-title">{{product.name}}</div>
         <br />
         <table class="table">
           <tr>
             <td>Hãng sản xuất:</td>
-            <td>Acer</td>
+            <td>{{product.category_name}}</td>
           </tr>
           <tr>
             <td>Giá bán:</td>
-            <td><b>6.500.000 ₫</b></td>
+            <td><b>{{product.price}} ₫</b></td>
           </tr>
         </table>
         <br />
@@ -28,6 +28,22 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data: () => ({
+    product: {},
+    baseUrl: 'http://127.0.0.1:8000',
+  }),
+  mounted: async function() {
+    //alert(this.$route.params.id);
+    let resp = await fetch(this.baseUrl + '/api/product/' + this.$route.params.id);
+    this.product = await resp.json();
+    console.log(this.product);
+  }
+}
+</script>
+
 
 <style scoped>
     .product-detail-title {
