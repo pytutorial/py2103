@@ -27,19 +27,18 @@ export default {
   methods: {
     save: async function () {
       let data = new FormData(document.getElementById("fmt"));
-      console.log(data.get("name"), data.get("code"));
       let url = this.baseUrl + '/api/category/';
+      
       console.log('url=', url);
-      fetch(url, {method: 'POST', body: data})
-        .then(resp => resp.json())
-        .then(result =>{
-            if(result.id) {
-              this.$router.push('/staff');
-            }else{
-              console.log('Error:', result);
-              alert('Loi xay ra');
-            }
-        })
+      let resp = await fetch(url, {method: 'POST', body: data});
+      let result = await resp.json();
+
+      if(result.id) {
+        this.$router.push('/staff');
+      }else{
+        console.log('Error:', result);
+        alert('Loi xay ra');
+      }
     },
   },
   mounted: function () {},
