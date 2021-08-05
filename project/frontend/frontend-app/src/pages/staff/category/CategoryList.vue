@@ -9,16 +9,16 @@
         <table class="table table-bordered mt-3">
             <thead>
                 <tr>
-                    <th>STT</th>
-                    <th>Mã</th>
-                    <th>Tên</th>
+                    <th style="width:10%">STT</th>
+                    <th style="width:40%">Mã</th>
+                    <th style="width:50%">Tên</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr v-for="(c,i) in items" :key="i">
+                    <td class="text-center">{{i+1}}</td>
+                    <td>{{c.code}}</td>
+                    <td>{{c.name}}</td>
                 </tr>
             </tbody>
         </table>
@@ -36,6 +36,9 @@ export default{
     }),
     methods: {
         fetch_data: async function(){
+            let resp = await fetch(this.baseUrl+'/api/category');
+            this.items = await resp.json();
+            console.log(this.items);
         }
     },
     mounted: async function(){
