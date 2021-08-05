@@ -23,7 +23,7 @@
         </table>
         <br />
         <router-link class="btn btn-secondary mr-1" to="/">Quay lại</router-link>
-        <router-link class="btn btn-primary" to="/order-product/1">Mua hàng</router-link>
+        <router-link class="btn btn-primary" :to="`/order-product/${product.id}`">Mua hàng</router-link>
       </div>
     </div>
   </div>
@@ -37,7 +37,9 @@ export default {
   }),
   mounted: async function() {
     //alert(this.$route.params.id);
-    let resp = await fetch(this.baseUrl + '/api/product/' + this.$route.params.id);
+    const url = this.baseUrl + '/api/product/' + this.$route.params.id;
+    console.log('url=', url)
+    let resp = await fetch(url);
     this.product = await resp.json();
     console.log(this.product);
   }
