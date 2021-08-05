@@ -22,7 +22,7 @@
           <td class="text-center">{{i+1}}</td>
           <td>{{p.code}}</td>
           <td>{{p.name}}</td>
-          <td class="text-center">{{p.price}}</td>
+          <td class="text-center">{{p.price}} ₫</td>
           <td><img style="max-width:100%; max-height:200px" :src="p.image" /></td>
         </tr>
       </tbody>

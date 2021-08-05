@@ -60,20 +60,20 @@
       </div>
       <div class="col-9">
         <ul class="list-unstyled row">
-          <li class="list-item col-sm-4 mt-3">
+          <li v-for="(p,i) in items" :key="i" class="list-item col-sm-4 mt-3" >
             <div class="item-container">
-              <router-link to="view-product/1" class="product-item">
+              <router-link :to="`view-product/${p.id}`" class="product-item">
                 <img
-                  src="https://raw.githubusercontent.com/pytutorial/themes/master/shop_themes/images/sample.jpg"
+                  :src="p.image"
                   class="product-image"
                 />
                 <div class="item-info">
                   <div>
-                    <span class="product-name">Acer 001</span>
+                    <span class="product-name">{{p.name}}</span>
                   </div>
                   <div>
                     <span class="price-title">Giá bán :</span>
-                    <span class="price">6.500.000 ₫</span>
+                    <span class="price">{{p.price}} ₫</span>
                   </div>
                 </div>
               </router-link>
@@ -84,6 +84,29 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+    data: () => ({
+        keyword: "",
+        page: 1,
+        total: 0,
+        items: [],
+        pageSize: 5,
+        baseUrl: 'http://127.0.0.1:8000'
+    }),
+    methods: {
+        fetch_data: async function(){
+          let resp = await fetch(this.baseUrl+'/api/product');
+          this.items = await resp.json();
+          console.log(this.items);
+        }
+    },
+    mounted: async function(){
+        this.fetch_data()
+    }
+}
+</script>
 
 <style scoped>
 .product-image {
