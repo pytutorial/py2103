@@ -10,20 +10,20 @@
     <table class="mt-3 table table-bordered">
       <thead>
         <tr>
-          <th>STT</th>
-          <th>Mã</th>
-          <th>Tên</th>
-          <th>Đơn giá</th>
-          <th>Ảnh</th>
+          <th style="width:5%">STT</th>
+          <th style="width:20%">Mã</th>
+          <th style="width:25%">Tên</th>
+          <th style="width:20%">Đơn giá</th>
+          <th style="width:30%">Ảnh</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+        <tr v-for="(p,i) in items" :key="i">
+          <td class="text-center">{{i+1}}</td>
+          <td>{{p.code}}</td>
+          <td>{{p.name}}</td>
+          <td class="text-center">{{p.price}}</td>
+          <td><img style="max-width:100%; max-height:200px" :src="p.image" /></td>
         </tr>
       </tbody>
     </table>
@@ -42,7 +42,9 @@ export default {
     }),
     methods: {
         fetch_data: async function(){
-            
+          let resp = await fetch(this.baseUrl+'/api/product');
+          this.items = await resp.json();
+          console.log(this.items);
         }
     },
     mounted: async function(){
