@@ -12,7 +12,7 @@ import CategoryForm from "../pages/staff/category/CategoryForm";
 import ProductListStaff from "../pages/staff/product/ProductList";
 import ProductForm from "../pages/staff/product/ProductForm";
 import OrderList from "../pages/staff/order/OrderList";
-import OrderView from "../pages/staff/order/OrderView";
+import OrderDetail from "../pages/staff/order/OrderDetail";
 
 Vue.use(VueRouter);
 const router = new VueRouter({
@@ -34,7 +34,7 @@ const router = new VueRouter({
 
         // Order
         {path: '/staff/order', component: OrderList, meta:{page:3}},
-        {path: '/staff/order/view/:id', component: OrderView, meta:{page:3}},
+        {path: '/staff/order/detail/:id', component: OrderDetail, meta:{page:3}},
     ]
 });
 export default router;
