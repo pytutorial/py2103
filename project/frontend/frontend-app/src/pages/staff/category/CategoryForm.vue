@@ -6,14 +6,14 @@
           <tr>
             <td><label>Mã:</label></td>
             <td>
-              <input class="form-control" name="code" />
+              <input v-model="item.code" class="form-control" name="code" />
               <span style="color:red" v-if="errors.code">{{errors.code[0]}}</span>
             </td>
           </tr>
           <tr>
             <td><label>Tên:</label></td>
             <td>
-              <input class="form-control" name="name" />
+              <input v-model="item.name" class="form-control" name="name" />
               <span style="color:red" v-if="errors.name">{{errors.name[0]}}</span>
             </td>
           </tr>
@@ -30,6 +30,7 @@ export default {
     name: "",
     baseUrl: 'http://127.0.0.1:8000',
     errors: {},
+    item: {},
   }),
   methods: {
     save: async function () {
@@ -49,6 +50,11 @@ export default {
       }
     },
   },
-  mounted: function () {},
+  mounted: function () {
+    let id = this.$route.params.id;
+    fetch(this.baseUrl + '/api/category/' + id)
+      .then(resp => resp.json())
+      .then(result => this.item = result);
+  },
 };
 </script>
