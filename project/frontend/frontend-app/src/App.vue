@@ -1,24 +1,32 @@
 <template>
   <div>
     <div v-if="$route.path.startsWith('/staff')">
-      <navbar-staff></navbar-staff>
+      <div v-if="access_token">
+        <navbar-staff></navbar-staff>
+        <router-view></router-view>
+      </div>
+      <log-in v-else></log-in>
     </div>
     <div v-else>
       <navbar-user></navbar-user>
+      <router-view></router-view>
     </div>
-    <router-view></router-view>
   </div>
 </template>
 <script>
 import NavbarStaff from './components/NavbarStaff.vue';
 import NavbarUser from './components/NavbarUser.vue';
+import LogIn from './components/LogIn.vue';
 
 export default {
-  components: {NavbarStaff, NavbarUser},
+  components: {NavbarStaff, NavbarUser, LogIn},
 
   computed:{
     current_page: function() {
-        return this.$route.meta.page;
+      return this.$route.meta.page;
+    },
+    access_token: function() {
+      return window.localStorage.getItem('access_token');
     }
   }
 }
