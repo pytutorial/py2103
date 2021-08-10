@@ -5,15 +5,21 @@
         <tbody>
           <tr>
             <td><label>Mã:</label></td>
-            <td><input class="form-control" name="code" /></td>
+            <td>
+              <input class="form-control" name="code" />
+              <span style="color:red" v-if="errors.code">{{errors.code[0]}}</span>
+            </td>
           </tr>
           <tr>
             <td><label>Tên:</label></td>
-            <td><input class="form-control" name="name" /></td>
+            <td>
+              <input class="form-control" name="name" />
+              <span style="color:red" v-if="errors.name">{{errors.name[0]}}</span>
+            </td>
           </tr>
         </tbody>
       </table>
-
+      <router-link to="/staff" class="btn btn-secondary mr-2">Quay lại</router-link>
       <button class="btn btn-primary">Lưu lại</button>
     </form>
   </div>
@@ -23,6 +29,7 @@ export default {
   data: () => ({
     name: "",
     baseUrl: 'http://127.0.0.1:8000',
+    errors: {},
   }),
   methods: {
     save: async function () {
@@ -37,7 +44,8 @@ export default {
         this.$router.push('/staff');
       }else{
         console.log('Error:', result);
-        alert('Loi xay ra');
+        this.errors = result;
+        //alert('Loi xay ra');
       }
     },
   },
