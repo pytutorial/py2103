@@ -40,7 +40,13 @@ export default{
       let resp = await fetch(this.baseUrl + '/api/token',
                         {method: 'POST', body: data});
       let result = await resp.json();
-      alert(result.access);
+      
+      if(!result.access){
+        this.error = 'Tên đăng nhập/mật khẩu không đúng';
+      }else {
+        window.localStorage.setItem('access_token', result.access);
+        window.location.reload();
+      }
     }
   }
 }
