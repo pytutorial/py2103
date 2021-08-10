@@ -24,6 +24,9 @@
           <td>{{ c.name }}</td>
           <td>
             <button @click="deleteItem(c.id)" class="btn btn-sm btn-danger">Xoá</button>
+            <router-link :to="`/staff/category/update/${c.id}`" class="ml-2 btn btn-sm btn-secondary">
+              Cập nhật
+            </router-link>
           </td>
         </tr>
       </tbody>
