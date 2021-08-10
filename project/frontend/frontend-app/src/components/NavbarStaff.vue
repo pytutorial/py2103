@@ -24,6 +24,7 @@
 </template>
 <script>
 export default{
+  props: ['current_page'],
   methods: {
     logOut: function() {
       window.localStorage.removeItem('access_token');

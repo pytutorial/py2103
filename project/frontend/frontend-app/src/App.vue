@@ -2,7 +2,7 @@
   <div>
     <div v-if="$route.path.startsWith('/staff')">
       <div v-if="access_token">
-        <navbar-staff></navbar-staff>
+        <navbar-staff :current_page="current_page"></navbar-staff>
         <router-view></router-view>
       </div>
       <log-in v-else></log-in>
