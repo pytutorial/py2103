@@ -20,10 +20,11 @@ def hello(request):
 def sign_up(request):
     username = request.data.get('username')
     password = request.data.get('password')
+    print('pass=', password)
     password2 = request.data.get('password2')
     if not username:
         return Response({'error': 'Tên đăng nhập không thê bỏ trống'})
-    if password or len(password) < 6:
+    if not password or len(password) < 6:
         return Response({'error': 'Mật khẩu phải ít nhất 6 kí tự'})
     if password2 != password:
         return Response({'error': 'Mật khẩu xác thực không đúng'})
