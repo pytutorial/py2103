@@ -12,8 +12,9 @@
       <thead>
         <tr>
           <th style="width: 10%">STT</th>
-          <th style="width: 40%">Mã</th>
-          <th style="width: 50%">Tên</th>
+          <th style="width: 35%">Mã</th>
+          <th style="width: 40%">Tên</th>
+          <th style="width: 15%"></th>
         </tr>
       </thead>
       <tbody>
@@ -21,6 +22,9 @@
           <td class="text-center">{{ i + 1 }}</td>
           <td>{{ c.code }}</td>
           <td>{{ c.name }}</td>
+          <td>
+            <button @click="deleteItem(c.id)" class="btn btn-sm btn-danger">Xoá</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -37,6 +41,20 @@ export default {
     baseUrl: "http://127.0.0.1:8000",
   }),
   methods: {
+    deleteItem: async function(id){
+      if(!confirm('Bạn có chắc muốn xoá nhóm này?')){
+        return;
+      }
+      let url = this.baseUrl + `/api/category/${id}/`;
+      console.log('url=', url);
+      let resp = await fetch(url, {method: 'DELETE'});
+      if(resp.ok) {
+        this.fetch_data();
+      }else{
+        alert('Lỗi xảy ra');
+      }
+    },
+
     fetch_data: async function () {
       let resp = await fetch(this.baseUrl + "/api/category");
       this.items = await resp.json();
