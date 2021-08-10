@@ -34,11 +34,20 @@ export default {
   }),
   methods: {
     save: async function () {
+      let url;
+      let method;
+
       let data = new FormData(document.getElementById("fmt"));
-      let url = this.baseUrl + '/api/category/';
+      if(this.item.id) {             //update
+        url = this.baseUrl + `/api/category/${this.item.id}/`;
+        method = "PUT";
+      }else{                    //create
+        url = this.baseUrl + '/api/category/';
+        method = "POST";
+      }
       
       console.log('url=', url);
-      let resp = await fetch(url, {method: 'POST', body: data});
+      let resp = await fetch(url, {method: method, body: data});
       let result = await resp.json();
 
       if(result.id) {
