@@ -13,7 +13,22 @@
             <router-link class="nav-link" to="/staff/order">Quản lý đơn hàng</router-link>
           </li>
         </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a href='javascript:void(0)' @click="logOut()" class="nav-link">Đăng xuất</a>
+          </li>
+        </ul>
       </nav>
     </div>
   </div>  
 </template>
+<script>
+export default{
+  methods: {
+    logOut: function() {
+      window.localStorage.removeItem('access_token');
+      window.location.reload();
+    }
+  }
+}
+</script>
