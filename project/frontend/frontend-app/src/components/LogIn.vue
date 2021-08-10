@@ -3,7 +3,7 @@
     <div class="login-form">
       <h3>Đăng nhập</h3>
       <br>
-      <form method="POST">
+      <form id="fmt" @submit.prevent="logIn()">
         <div class="form-group">
           <label>Tên tài khoản</label>
           <input name="username" type="text" class="form-control" />
@@ -13,7 +13,7 @@
           <input name="password" type="password" class="form-control" />
         </div>
         <div class="form-group">
-          <span id="error" style="color:red"></span>
+          <span id="error" style="color:red">{{error}}</span>
         </div>
         <br>
         <div class="form-group">
@@ -27,6 +27,25 @@
     </div>
   </div>
 </template>
+
+<script>
+export default{
+  data: () => ({
+    baseUrl: 'http://127.0.0.1:8000',
+    error: ''
+  }),
+  methods: {
+    logIn: async function() {
+      let data = new FormData(document.getElementById('fmt'));
+      let resp = await fetch(this.baseUrl + '/api/token',
+                        {method: 'POST', body: data});
+      let result = await resp.json();
+      alert(result.access);
+    }
+  }
+}
+</script>
+
 <style scoped>
   .bg-login {
     position: relative;
