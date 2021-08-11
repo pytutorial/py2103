@@ -18,17 +18,9 @@
               <input type="radio" name="categoryId" checked value="" />
               <label>Tất cả</label>
             </div>
-            <div>
-              <input name="categoryId" type="radio" value="1" />
-              <label>Acer</label>
-            </div>
-            <div>
-              <input name="categoryId" type="radio" value="2" />
-              <label>Asus</label>
-            </div>
-            <div>
-              <input name="categoryId" type="radio" value="3" />
-              <label>Lenovo</label>
+            <div v-for="(c,i) in categoryList" :key="i">
+              <input  name="categoryId" type="radio" :value="c.id" />
+              <label>{{c.name}}</label>
             </div>
           </div>
 

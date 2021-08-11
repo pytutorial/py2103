@@ -18,6 +18,9 @@
         </tr>
       </thead>
       <tbody>
+        <tr v-if="items.length==0">
+          <td colspan="4">Không có nhóm sản phẩm nào</td>
+        </tr>
         <tr v-for="(c, i) in items" :key="i">
           <td class="text-center">{{ i + 1 }}</td>
           <td>{{ c.code }}</td>

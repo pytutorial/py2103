@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from rest_framework.serializers import CharField
+from rest_framework.serializers import CharField, ImageField
 from .models import *
 
 class CategorySerializer(ModelSerializer):
@@ -12,4 +12,12 @@ class ProductSerializer(ModelSerializer):
         model = Product
         fields = '__all__'
 
-    category_name = CharField(source='category.name')
+    def get_fields(self, *args, **kwargs):
+        fields = super().get_fields(*args, **kwargs)
+        
+        if self.instance is not None:
+            fields['image'].required = False        # Make image optional when update product
+
+        return fields
+
+    category_name = CharField(source='category.name', read_only=True)

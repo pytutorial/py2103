@@ -4,14 +4,14 @@
       <table class="table">
         <tbody>
           <tr>
-            <td><label>Mã:</label></td>
+            <th style="width:30%">Mã:</th>
             <td>
               <input v-model="item.code" class="form-control" name="code" />
               <span style="color:red" v-if="errors.code">{{errors.code[0]}}</span>
             </td>
           </tr>
           <tr>
-            <td><label>Tên:</label></td>
+            <th>Tên:</th>
             <td>
               <input v-model="item.name" class="form-control" name="name" />
               <span style="color:red" v-if="errors.name">{{errors.name[0]}}</span>
@@ -46,7 +46,7 @@ export default {
         method = "POST";
       }
       
-      console.log('url=', url);
+      console.log('url=', url); 
       let resp = await fetch(url, {method: method, body: data});
       let result = await resp.json();
 
@@ -59,11 +59,12 @@ export default {
       }
     },
   },
-  mounted: function () {
+  mounted: async function () {
     let id = this.$route.params.id;
-    fetch(this.baseUrl + '/api/category/' + id)
-      .then(resp => resp.json())
-      .then(result => this.item = result);
+    if(id){
+      let resp = await fetch(this.baseUrl + '/api/category/' + id);
+      this.item = await resp.json();
+    }
   },
 };
 </script>
