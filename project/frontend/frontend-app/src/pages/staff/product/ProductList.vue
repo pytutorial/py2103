@@ -18,7 +18,7 @@
           <th style="width:15%">Ảnh</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-if="!loading">
         <tr v-if="items.length==0">
           <td colspan="6">Không có sản phẩm nào</td>
         </tr>
@@ -47,14 +47,17 @@ export default {
         page: 1,
         total: 0,
         items: [],
+        loading: true,
         pageSize: 5,
         baseUrl: 'http://127.0.0.1:8000'
     }),
     methods: {
       fetch_data: async function(){
+        this.loading = true;
         let resp = await fetch(this.baseUrl+'/api/product');
         this.items = await resp.json();
         console.log(this.items);
+        this.loading = false;
       },
       
       deleteItem: async function(id){

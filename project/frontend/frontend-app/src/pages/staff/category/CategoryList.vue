@@ -17,7 +17,7 @@
           <th style="width: 15%"></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody v-if="!loading">
         <tr v-if="items.length==0">
           <td colspan="4">Không có nhóm sản phẩm nào</td>
         </tr>
@@ -43,6 +43,7 @@ export default {
     page: 1,
     total: 0,
     items: [],
+    loading: true,
     pageSize: 5,
     baseUrl: "http://127.0.0.1:8000",
   }),
@@ -62,8 +63,10 @@ export default {
     },
 
     fetch_data: async function () {
+      this.loading = true;
       let resp = await fetch(this.baseUrl + "/api/category");
       this.items = await resp.json();
+      this.loading = false;
       console.log(this.items);
     },
   },
