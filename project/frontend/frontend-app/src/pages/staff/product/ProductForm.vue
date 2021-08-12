@@ -88,11 +88,10 @@ export default {
       console.log('url=', url);
 
       let resp = await fetch(url, {method: method, body: data });
-      let result = await resp.json();
-
-      if(result.id) {
+      if(resp.ok) {
         this.$router.push('/staff/product');
       }else{
+        let result = await resp.json();
         this.errors = result;
         console.log('errors=', result);
       }
