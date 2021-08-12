@@ -1,6 +1,7 @@
 from rest_framework.serializers import ModelSerializer
-from rest_framework.serializers import CharField, ImageField
+from rest_framework.serializers import CharField
 from .models import *
+from rest_framework.validators import UniqueValidator
 
 class CategorySerializer(ModelSerializer):
     class Meta:
@@ -11,7 +12,36 @@ class ProductSerializer(ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
+        extra_kwargs = {
+            "category": {
+                "error_messages": {
+                    'null': 'Trường này không được bỏ trống.'
+                }
+            },
+            "code": {
+                "validators": [
+                    UniqueValidator(queryset=Product.objects.all(), message='Mã sản phẩm đã tồn tại')
+                ]
+            },
+            "price": {
+                "error_messages": {
+                    'invalid': 'Giá sản phẩm không hợp lệ.'
+                }
+            },
+            "image":{
+                "error_messages": {
+                    'invalid': 'Ảnh sản phẩm không hợp lệ.'
+                }
+            }
+        }
 
+    def is_valid(self, raise_exception):
+        try:
+            return super().is_valid(raise_exception=raise_exception)
+        except Exception as e:
+            print(self.errors)
+            raise e
+    
     def get_fields(self, *args, **kwargs):
         fields = super().get_fields(*args, **kwargs)
         
