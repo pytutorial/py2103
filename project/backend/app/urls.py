@@ -3,6 +3,7 @@ from rest_framework.routers import DefaultRouter
 from .views import *
 
 urlpatterns = [ 
+    path('order-product/<pk>', orderProduct),
     path('sign-up', sign_up),
     path('hello', hello)
 ]

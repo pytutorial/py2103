@@ -1,5 +1,5 @@
-from rest_framework.serializers import ModelSerializer
-from rest_framework.serializers import CharField
+from rest_framework.serializers import ModelSerializer, Serializer
+from rest_framework.serializers import CharField, IntegerField, DateTimeField
 from .models import *
 from rest_framework.validators import UniqueValidator
 
@@ -51,3 +51,9 @@ class ProductSerializer(ModelSerializer):
         return fields
 
     category_name = CharField(source='category.name', read_only=True)
+
+class OrderInputSerializer(Serializer):
+    qty = IntegerField()
+    customerName = CharField()
+    customerPhone = CharField()
+    customerAddress = CharField()

@@ -47,7 +47,8 @@ export default {
       }
       
       console.log('url=', url); 
-      let resp = await fetch(url, {method: method, body: data});
+      let headers = {'Authorization': 'Bearer ' + window.localStorage.getItem('access_token')};
+      let resp = await fetch(url, {method: method, body: data, headers:headers});
       if(resp.ok){
         this.$router.push('/staff');
       }else{

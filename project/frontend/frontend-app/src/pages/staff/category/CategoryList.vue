@@ -54,7 +54,8 @@ export default {
       }
       let url = this.baseUrl + `/api/category/${id}/`;
       console.log('url=', url);
-      let resp = await fetch(url, {method: 'DELETE'});
+      let headers = {'Authorization': 'Bearer ' + window.localStorage.getItem('access_token')};
+      let resp = await fetch(url, {method: 'DELETE', headers});
       if(resp.ok) {
         this.fetch_data();
       }else{
